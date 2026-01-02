@@ -130,7 +130,6 @@ class AppTexts extends StatelessWidget {
       maxLines: maxLines,
       overflow: overflow,
       softWrap: softWrap,
-      
     );
   }
 }
