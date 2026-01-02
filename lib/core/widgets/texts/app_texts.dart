@@ -8,20 +8,20 @@ enum AppFontWeight { bold, semiBold, medium, regular, light, thin }
 
 extension AppFontFamilyExt on AppFontFamily {
   String get familyName => switch (this) {
-        AppFontFamily.poppins => 'Poppins',
-        AppFontFamily.leagueSpartan => 'League Spartan',
-      };
+    AppFontFamily.poppins => 'Poppins',
+    AppFontFamily.leagueSpartan => 'League Spartan',
+  };
 }
 
 extension AppFontWeightExt on AppFontWeight {
   FontWeight get materialWeight => switch (this) {
-        AppFontWeight.bold => FontWeight.w700,
-        AppFontWeight.semiBold => FontWeight.w600,
-        AppFontWeight.medium => FontWeight.w500,
-        AppFontWeight.regular => FontWeight.w400,
-        AppFontWeight.light => FontWeight.w300,
-        AppFontWeight.thin => FontWeight.w200,
-      };
+    AppFontWeight.bold => FontWeight.w700,
+    AppFontWeight.semiBold => FontWeight.w600,
+    AppFontWeight.medium => FontWeight.w500,
+    AppFontWeight.regular => FontWeight.w400,
+    AppFontWeight.light => FontWeight.w300,
+    AppFontWeight.thin => FontWeight.w200,
+  };
 }
 
 /// Helper methods to build text styles that follow the typography guide.
@@ -130,6 +130,7 @@ class AppTexts extends StatelessWidget {
       maxLines: maxLines,
       overflow: overflow,
       softWrap: softWrap,
+      
     );
   }
 }
