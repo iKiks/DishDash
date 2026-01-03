@@ -1,28 +1,38 @@
-import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:flutter/material.dart';
-// import 'package:gleen/features/quizz/presentation/bloc/quiz_session/quiz_session_bloc.dart';
 
-/// The root widget of the application.
-///
-/// This file now sets up the BLoC provider and integrates with `go_router`
-/// to manage the app's navigation stack.
-class App extends StatelessWidget {
-  const App({super.key});
+import 'core/theme/app_colors.dart';
+import 'features/launch/presentation/launch_page.dart';
+
+class DishDashApp extends StatelessWidget {
+  const DishDashApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This initializes the responsive sizing utility.
-    ResponsiveSize.init(context);
+    return MaterialApp(
+      title: 'DishDash',
+      theme: _buildTheme(),
+      home: const LaunchPage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
 
-    return  MaterialApp.router(
-          title: 'G.L.E.E.N. App',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          // Use the router configuration from the 'router.dart' file.
-          // routerConfig: AppRouter.router,
-        );
+  ThemeData _buildTheme() {
+    final base = ThemeData.light();
+    return base.copyWith(
+      colorScheme: base.colorScheme.copyWith(
+        primary: AppColors.redPink,
+        secondary: AppColors.pink,
+        surface: AppColors.white,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: AppColors.brownPod,
+      ),
+      scaffoldBackgroundColor: AppColors.white,
+      textTheme: base.textTheme.apply(
+        fontFamily: 'Poppins',
+        bodyColor: AppColors.brownPod,
+        displayColor: AppColors.brownPod,
+      ),
+    );
   }
 }

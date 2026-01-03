@@ -1,6 +1,8 @@
 ﻿import 'package:flutter/material.dart';
 
 import '../../theme/app_colors.dart';
+import 'button_colors.dart';
+import 'button_label.dart';
 
 class ReuseableButton extends StatelessWidget {
   final String label;
@@ -33,7 +35,11 @@ class ReuseableButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool disabledState = isDisabled || isLoading;
-    final Color resolvedBackground = _resolveBackgroundColor(disabledState);
+    final Color resolvedBackground = ReuseableButtonColors.resolveBackground(
+      isTransparent: isTransparent,
+      isDisabled: disabledState,
+      buttonColor: buttonColor,
+    );
     final Color resolvedForeground =
         textColor ?? (isTransparent ? AppColors.redPink : Colors.white);
     final double resolvedHeight = buttonHeight ?? 56;
@@ -42,7 +48,10 @@ class ReuseableButton extends StatelessWidget {
     final ButtonStyle style = ElevatedButton.styleFrom(
       minimumSize: Size(resolvedWidth, resolvedHeight),
       backgroundColor: resolvedBackground,
-      disabledBackgroundColor: _resolveDisabledBackground(),
+      disabledBackgroundColor: ReuseableButtonColors.resolveDisabledBackground(
+        isTransparent: isTransparent,
+        buttonColor: buttonColor,
+      ),
       foregroundColor: resolvedForeground,
       disabledForegroundColor: resolvedForeground,
       shadowColor: isTransparent ? Colors.transparent : null,
@@ -61,48 +70,14 @@ class ReuseableButton extends StatelessWidget {
       child: ElevatedButton(
         style: style,
         onPressed: disabledState ? null : onPressed,
-        child: child ?? _buildLabel(context, resolvedForeground),
+        child:
+            child ??
+            ReuseableButtonLabel(
+              isLoading: isLoading,
+              label: label,
+              textColor: resolvedForeground,
+            ),
       ),
     );
-  }
-
-  Widget _buildLabel(BuildContext context, Color resolvedForeground) {
-    if (isLoading) {
-      return SizedBox(
-        width: 20,
-        height: 20,
-        child: CircularProgressIndicator(
-          strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(resolvedForeground),
-        ),
-      );
-    }
-
-    final TextStyle baseStyle =
-        Theme.of(context).textTheme.labelLarge ??
-        const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
-
-    return Text(
-      label,
-      textAlign: TextAlign.center,
-      style: baseStyle.copyWith(color: resolvedForeground),
-    );
-  }
-
-  Color _resolveBackgroundColor(bool disabledState) {
-    if (isTransparent) {
-      return Colors.transparent;
-    }
-    if (disabledState) {
-      return buttonColor ?? AppColors.pink;
-    }
-    return buttonColor ?? AppColors.redPink;
-  }
-
-  Color _resolveDisabledBackground() {
-    if (isTransparent) {
-      return Colors.transparent;
-    }
-    return buttonColor ?? AppColors.pink;
   }
 }
