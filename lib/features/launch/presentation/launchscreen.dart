@@ -17,7 +17,7 @@ class Launchscreen extends StatelessWidget {
             const SizedBox(height: 20),
             AppTexts(
               'DishDash',
-              fontSize: 64,
+              fontSize: 63.5,
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),
