@@ -1,7 +1,7 @@
+import 'package:dishdash/features/launch/presentation/launchscreen.dart';
 import 'package:flutter/material.dart';
 
 import 'core/theme/app_colors.dart';
-import 'features/launch/presentation/launch_page.dart';
 
 class DishDashApp extends StatelessWidget {
   const DishDashApp({super.key});
@@ -11,7 +11,7 @@ class DishDashApp extends StatelessWidget {
     return MaterialApp(
       title: 'DishDash',
       theme: _buildTheme(),
-      home: const LaunchPage(),
+      home: const Launchscreen(),
       debugShowCheckedModeBanner: false,
     );
   }

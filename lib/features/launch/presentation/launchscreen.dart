@@ -11,12 +11,9 @@ class Launchscreen extends StatelessWidget {
       backgroundColor: AppColors.redPink,
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/logo_white.png',
-              width: 150,
-              height: 150,
-            ),
+            Image.asset('lib/core/assets/logo.png', width: 150, height: 150),
             const SizedBox(height: 20),
             AppTexts(
               'DishDash',
