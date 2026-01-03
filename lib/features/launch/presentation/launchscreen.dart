@@ -23,10 +23,7 @@ class _LaunchscreenState extends State<Launchscreen>
       duration: const Duration(milliseconds: 1200),
     );
 
-    _scale = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeOutBack,
-    );
+    _scale = CurvedAnimation(parent: _controller, curve: Curves.easeOutBack);
 
     _fade = CurvedAnimation(
       parent: _controller,
@@ -62,7 +59,7 @@ class _LaunchscreenState extends State<Launchscreen>
                 const SizedBox(height: 20),
                 AppTexts(
                   'DishDash',
-                  fontSize: 63.5,
+                  fontSize: 64,
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                 ),
