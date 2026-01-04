@@ -34,6 +34,7 @@ dev_dependencies:
 
   flutter_lints: ^6.0.0
   flutter_native_splash: ^2.4.1
+  image: ^4.1.7
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -45,10 +46,10 @@ flutter:
 
 flutter_native_splash:
   color: "#FD5D69"
-  image: lib/core/assets/logo.png
+  image: lib/core/assets/logo_splash.png
   android_12:
     color: "#FD5D69"
-    image: lib/core/assets/logo.png
+    image: lib/core/assets/logo_splash.png
   ios: true
   web: false
 
