@@ -34,7 +34,7 @@ class _LaunchscreenState extends State<Launchscreen>
   }
 
   @override
-  void dispose() {
+  void dispose() { 
     _controller.dispose();
     super.dispose();
   }
