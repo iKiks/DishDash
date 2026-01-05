@@ -1,4 +1,5 @@
 import 'package:dishdash/core/theme/app_colors.dart';
+import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,7 @@ class _LaunchscreenState extends State<Launchscreen>
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     _controller.dispose();
     super.dispose();
   }
@@ -53,13 +54,13 @@ class _LaunchscreenState extends State<Launchscreen>
               children: [
                 Image.asset(
                   'lib/core/assets/logo.png',
-                  width: 150,
-                  height: 150,
+                  width: ResponsiveSize.width(150),
+                  height: ResponsiveSize.height(150),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: ResponsiveSize.height(20)),
                 AppTexts(
                   'DishDash',
-                  fontSize: 64,
+                  fontSize: ResponsiveSize.fontSize(64),
                   color: Colors.white,
                   fontWeight: FontWeight.w600,
                 ),
