@@ -76,6 +76,7 @@ class ReuseableButton extends StatelessWidget {
               isLoading: isLoading,
               label: label,
               textColor: resolvedForeground,
+              isDisabled: disabledState,
             ),
       ),
     );
