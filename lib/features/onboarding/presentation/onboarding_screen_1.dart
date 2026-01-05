@@ -69,7 +69,7 @@ class OnboardingScreen1 extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: Container(
-                    height: ResponsiveSize.height(80),
+                    height: ResponsiveSize.height(120),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,

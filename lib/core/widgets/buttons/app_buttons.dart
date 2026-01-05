@@ -41,7 +41,8 @@ class ReuseableButton extends StatelessWidget {
       buttonColor: buttonColor,
     );
     final Color resolvedForeground =
-        textColor ?? (isTransparent ? AppColors.redPink : Colors.white);
+        textColor ??
+        (disabledState || isTransparent ? AppColors.redPink : AppColors.white);
     final double resolvedHeight = buttonHeight ?? 56;
     final double resolvedWidth = buttonWidth ?? double.infinity;
 
