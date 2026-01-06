@@ -1,6 +1,7 @@
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/back_button.dart';
+import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -38,9 +39,23 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               CustomBackButton(),
               _ProgressBar(),
+              Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: ResponsiveSize.height(20)),
+                    AppTexts(
+                      '¿What is your cooking level?',
+                      fontSize: ResponsiveSize.fontSize(20),
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
