@@ -59,6 +59,35 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
                       fontSize: ResponsiveSize.fontSize(13),
                       fontWeight: FontWeight.w400,
                     ),
+                    SizedBox(height: ResponsiveSize.height(20)),
+                    Container(
+                      width: double.infinity,
+                      height: ResponsiveSize.height(116),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: ResponsiveSize.width(17),
+                        vertical: ResponsiveSize.height(12),
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.sweetPink),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppTexts(
+                            'Novice',
+                            fontSize: ResponsiveSize.fontSize(16),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          SizedBox(height: ResponsiveSize.height(12)),
+                          AppTexts(
+                            'I am new to cooking and want to learn the basics, from mastering simple knife skills to following easy recipes with confidence.',
+                            fontSize: ResponsiveSize.fontSize(13),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
