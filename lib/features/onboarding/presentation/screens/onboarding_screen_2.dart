@@ -3,9 +3,31 @@ import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class OnboardingScreen2 extends StatelessWidget {
+class OnboardingScreen2 extends StatefulWidget {
   const OnboardingScreen2({super.key});
+
+  @override
+  State<OnboardingScreen2> createState() => _OnboardingScreen2State();
+}
+
+class _OnboardingScreen2State extends State<OnboardingScreen2> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.immersiveSticky,
+    );
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.edgeToEdge,
+    );
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

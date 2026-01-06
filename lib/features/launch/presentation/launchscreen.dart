@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
-import 'package:dishdash/features/onboarding/presentation/onboarding_screen_1.dart';
+import 'package:dishdash/features/onboarding/presentation/screens/onboarding_screen_1.dart';
 import 'package:flutter/material.dart';
 
 class Launchscreen extends StatefulWidget {
