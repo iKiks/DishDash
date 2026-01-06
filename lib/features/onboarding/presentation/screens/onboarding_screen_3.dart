@@ -1,7 +1,9 @@
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
+import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/buttons/back_button.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/onboarding/presentation/widgets/level_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +15,8 @@ class OnboardingScreen3 extends StatefulWidget {
 }
 
 class _OnboardingScreen3State extends State<OnboardingScreen3> {
+  int _selectedLevel = 0;
+
   @override
   void initState() {
     super.initState();
@@ -59,38 +63,17 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
                       fontSize: ResponsiveSize.fontSize(13),
                       fontWeight: FontWeight.w400,
                     ),
-                    SizedBox(height: ResponsiveSize.height(20)),
-                    Container(
-                      width: double.infinity,
-                      height: ResponsiveSize.height(116),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ResponsiveSize.width(17),
-                        vertical: ResponsiveSize.height(12),
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.sweetPink),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AppTexts(
-                            'Novice',
-                            fontSize: ResponsiveSize.fontSize(16),
-                            fontWeight: FontWeight.w500,
-                          ),
-                          SizedBox(height: ResponsiveSize.height(12)),
-                          AppTexts(
-                            'I am new to cooking and want to learn the basics, from mastering simple knife skills to following easy recipes with confidence.',
-                            fontSize: ResponsiveSize.fontSize(13),
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ],
-                      ),
+                    SizedBox(height: ResponsiveSize.height(10)),
+                    LevelSelector(
+                      selectedLevel: _selectedLevel,
+                      onLevelSelected: (index) {
+                        setState(() => _selectedLevel = index);
+                      },
                     ),
                   ],
                 ),
               ),
+              _ContinueButton(),
             ],
           ),
         ),
@@ -153,6 +136,32 @@ class _Progress extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.redPink,
         borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+}
+
+class _ContinueButton extends StatelessWidget {
+  const _ContinueButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: ResponsiveSize.height(32),
+      left: 0,
+      right: 0,
+      child: Center(
+        child: ReuseableButton(
+          buttonWidth: ResponsiveSize.width(207),
+          buttonHeight: ResponsiveSize.height(40),
+          label: "Continue",
+          isDisabled: true,
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const OnboardingScreen3()),
+            );
+          },
+        ),
       ),
     );
   }
