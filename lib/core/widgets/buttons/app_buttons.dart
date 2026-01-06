@@ -70,7 +70,7 @@ class ReuseableButton extends StatelessWidget {
       height: resolvedHeight,
       child: ElevatedButton(
         style: style,
-        onPressed: disabledState ? null : onPressed,
+        onPressed: onPressed,
         child:
             child ??
             ReuseableButtonLabel(

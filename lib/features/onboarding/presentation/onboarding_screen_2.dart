@@ -2,11 +2,10 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
-import 'package:dishdash/features/onboarding/presentation/onboarding_screen_2.dart';
 import 'package:flutter/material.dart';
 
-class OnboardingScreen1 extends StatelessWidget {
-  const OnboardingScreen1({super.key});
+class OnboardingScreen2 extends StatelessWidget {
+  const OnboardingScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +14,44 @@ class OnboardingScreen1 extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: ResponsiveSize.height(50)),
-            _TitleSection(),
-            _ImageSection(),
-          ],
-        ),
+        child: Stack(children: const [_BackButton(), _Content()]),
+      ),
+    );
+  }
+}
+
+/* ------------------------------ CONTENT ---------------------------------- */
+
+class _Content extends StatelessWidget {
+  const _Content();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: ResponsiveSize.height(50)),
+        _TitleSection(),
+        _ImageSection(),
+      ],
+    );
+  }
+}
+
+/* ----------------------------- BACK BUTTON -------------------------------- */
+
+class _BackButton extends StatelessWidget {
+  const _BackButton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: ResponsiveSize.height(12),
+      left: ResponsiveSize.width(16),
+      child: IconButton(
+        splashRadius: 22,
+        icon: Image.asset('lib/core/assets/icons/arrow.png'),
+        onPressed: () => Navigator.of(context).maybePop(),
       ),
     );
   }
@@ -41,13 +70,13 @@ class _TitleSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppTexts(
-            'Get inspired',
+            'Get an increase your skills',
             fontSize: ResponsiveSize.fontSize(20),
             fontWeight: FontWeight.w600,
           ),
           SizedBox(height: ResponsiveSize.height(6)),
           AppTexts(
-            'Get inspired with our daily recipe recommendations.',
+            'Learn essential cooking techniques at your own pace.',
             fontSize: ResponsiveSize.fontSize(13),
           ),
         ],
@@ -63,7 +92,7 @@ class _ImageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       clipBehavior: Clip.none,
-      children: [
+      children: const [
         _BackgroundImage(),
         _TopFade(),
         _BottomFade(),
@@ -74,14 +103,16 @@ class _ImageSection extends StatelessWidget {
 }
 
 class _BackgroundImage extends StatelessWidget {
+  const _BackgroundImage();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
       child: Image.asset(
-        'lib/core/assets/onboarding_1.png',
+        'lib/core/assets/onboarding_2.png',
         fit: BoxFit.cover,
-        height: ResponsiveSize.height(620),
+        height: ResponsiveSize.height(630),
       ),
     );
   }
@@ -90,6 +121,8 @@ class _BackgroundImage extends StatelessWidget {
 /* ------------------------------ GRADIENTS -------------------------------- */
 
 class _TopFade extends StatelessWidget {
+  const _TopFade();
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -110,6 +143,8 @@ class _TopFade extends StatelessWidget {
 }
 
 class _BottomFade extends StatelessWidget {
+  const _BottomFade();
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
@@ -133,10 +168,12 @@ class _BottomFade extends StatelessWidget {
 /* ------------------------------ BUTTON ----------------------------------- */
 
 class _ContinueButton extends StatelessWidget {
+  const _ContinueButton();
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: ResponsiveSize.height(580),
+      top: ResponsiveSize.height(560),
       left: 0,
       right: 0,
       child: Center(
@@ -145,14 +182,7 @@ class _ContinueButton extends StatelessWidget {
           buttonHeight: ResponsiveSize.height(45),
           label: "Continue",
           isDisabled: true,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const OnboardingScreen2(),
-              ),
-            );
-          },
+          onPressed: () {},
         ),
       ),
     );

@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/onboarding/presentation/onboarding_screen_1.dart';
 import 'package:flutter/material.dart';
 
 class Launchscreen extends StatefulWidget {
@@ -15,6 +18,7 @@ class _LaunchscreenState extends State<Launchscreen>
   late final AnimationController _controller;
   late final Animation<double> _scale;
   late final Animation<double> _fade;
+  Timer? _navTimer;
 
   @override
   void initState() {
@@ -32,16 +36,27 @@ class _LaunchscreenState extends State<Launchscreen>
     );
 
     _controller.forward();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _navTimer = Timer(const Duration(seconds: 3), () {
+        if (!mounted) return;
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const OnboardingScreen1()),
+        );
+      });
+    });
   }
 
   @override
   void dispose() {
+    _navTimer?.cancel();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    ResponsiveSize.init(context);
     return Scaffold(
       backgroundColor: AppColors.redPink,
       body: Center(

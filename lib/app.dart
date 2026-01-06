@@ -1,6 +1,4 @@
-import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/features/launch/presentation/launchscreen.dart';
-import 'package:dishdash/features/onboarding/presentation/onboarding_screen_1.dart';
 import 'package:flutter/material.dart';
 
 import 'core/theme/app_colors.dart';
@@ -10,12 +8,10 @@ class DishDashApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    ResponsiveSize.init(context);
     return MaterialApp(
       title: 'DishDash',
       theme: _buildTheme(),
-      home: const OnboardingScreen1(),
+      home: const Launchscreen(),
       debugShowCheckedModeBanner: false,
     );
   }
