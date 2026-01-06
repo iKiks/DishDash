@@ -1,8 +1,8 @@
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
+import 'package:dishdash/core/widgets/buttons/overlay_back_button.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
-import 'package:dishdash/core/widgets/buttons/back_button.dart';
 import 'package:dishdash/features/onboarding/presentation/screens/onboarding_screen_3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,16 +18,12 @@ class _OnboardingScreen2State extends State<OnboardingScreen2> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.immersiveSticky,
-    );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.edgeToEdge,
-    );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
     super.dispose();
   }
 
@@ -38,7 +34,7 @@ class _OnboardingScreen2State extends State<OnboardingScreen2> {
     return Scaffold(
       body: SafeArea(
         bottom: false,
-        child: Stack(children: const [CustomBackButton(), _Content()]),
+        child: Stack(children: const [_Content(), OverlayBackButton()]),
       ),
     );
   }
@@ -56,13 +52,11 @@ class _Content extends StatelessWidget {
       children: [
         SizedBox(height: ResponsiveSize.height(50)),
         _TitleSection(),
-        _ImageSection(),
+        const Expanded(child: _ImageSection()),
       ],
     );
   }
 }
-
-
 
 /* ----------------------------- TITLE SECTION ----------------------------- */
 
@@ -95,6 +89,8 @@ class _TitleSection extends StatelessWidget {
 /* ----------------------------- IMAGE SECTION ------------------------------ */
 
 class _ImageSection extends StatelessWidget {
+  const _ImageSection();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -114,13 +110,8 @@ class _BackgroundImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Image.asset(
-        'lib/core/assets/onboarding_2.png',
-        fit: BoxFit.cover,
-        height: ResponsiveSize.height(630),
-      ),
+    return Positioned.fill(
+      child: Image.asset('lib/core/assets/onboarding_2.png', fit: BoxFit.cover),
     );
   }
 }
@@ -135,6 +126,7 @@ class _TopFade extends StatelessWidget {
     return Positioned(
       left: 0,
       right: 0,
+      top: 0,
       child: Container(
         height: ResponsiveSize.height(250),
         decoration: BoxDecoration(
@@ -180,7 +172,7 @@ class _ContinueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: ResponsiveSize.height(560),
+      bottom: ResponsiveSize.height(32),
       left: 0,
       right: 0,
       child: Center(
@@ -191,9 +183,7 @@ class _ContinueButton extends StatelessWidget {
           isDisabled: true,
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const OnboardingScreen3(),
-              ),
+              MaterialPageRoute(builder: (_) => const OnboardingScreen3()),
             );
           },
         ),
