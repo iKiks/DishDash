@@ -53,6 +53,12 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
                       fontSize: ResponsiveSize.fontSize(20),
                       fontWeight: FontWeight.w600,
                     ),
+                    SizedBox(height: ResponsiveSize.height(15)),
+                    AppTexts(
+                      'Please select your cooking level for better recommendations.',
+                      fontSize: ResponsiveSize.fontSize(13),
+                      fontWeight: FontWeight.w400,
+                    ),
                   ],
                 ),
               ),
