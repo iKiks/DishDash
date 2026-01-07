@@ -43,6 +43,7 @@ flutter:
   assets:
     - lib/core/assets/
     - lib/core/assets/icons/
+    - lib/core/assets/preferences/
 
 flutter_native_splash:
   color: "#FD5D69"

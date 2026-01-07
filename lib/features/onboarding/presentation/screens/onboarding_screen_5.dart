@@ -65,6 +65,11 @@ class _OnboardingScreen5State extends State<OnboardingScreen5> {
                 ),
               ),
               SizedBox(height: ResponsiveSize.height(15)),
+              Card(
+                child: Column(
+                  
+                )
+              ),
               _SkipContinueButton(),
             ],
           ),
