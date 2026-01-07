@@ -65,7 +65,7 @@ class _OnboardingScreen5State extends State<OnboardingScreen5> {
                 ),
               ),
               SizedBox(height: ResponsiveSize.height(15)),
-              _ContinueButton(),
+              _SkipContinueButton(),
             ],
           ),
         ),
@@ -135,8 +135,8 @@ class _Progress extends StatelessWidget {
   }
 }
 
-class _ContinueButton extends StatelessWidget {
-  const _ContinueButton();
+class _SkipContinueButton extends StatelessWidget {
+  const _SkipContinueButton();
 
   @override
   Widget build(BuildContext context) {
@@ -145,15 +145,30 @@ class _ContinueButton extends StatelessWidget {
       left: 0,
       right: 0,
       child: Center(
-        child: ReuseableButton(
-          buttonWidth: ResponsiveSize.width(207),
-          buttonHeight: ResponsiveSize.height(45),
-          label: "Continue",
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const OnboardingScreen5()),
-            );
-          },
+        child: Row(
+          children: [
+            ReuseableButton(
+              buttonWidth: ResponsiveSize.width(162),
+              buttonHeight: ResponsiveSize.height(45),
+              label: "Continue",
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const OnboardingScreen5()),
+                );
+              },
+            ),
+            const Spacer(),
+            ReuseableButton(
+              buttonWidth: ResponsiveSize.width(162),
+              buttonHeight: ResponsiveSize.height(45),
+              label: "Skip",
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (_) => const OnboardingScreen5()),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
