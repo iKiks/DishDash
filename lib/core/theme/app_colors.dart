@@ -8,4 +8,5 @@ class AppColors {
 	static const Color redPink = Color(0xFFFD5D69);
 	static const Color brownPod = Color(0xFF3E2823);
 	static const Color black = Color(0xFF1C0F0D);
+  static const Color transparent = Colors.transparent;
 }

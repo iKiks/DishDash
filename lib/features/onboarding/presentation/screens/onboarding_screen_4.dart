@@ -151,10 +151,8 @@ class _ContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: ResponsiveSize.height(32),
-      left: 0,
-      right: 0,
+    return Padding(
+      padding: EdgeInsets.only(top: ResponsiveSize.height(24)),
       child: Center(
         child: ReuseableButton(
           buttonWidth: ResponsiveSize.width(207),
