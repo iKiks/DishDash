@@ -3,6 +3,7 @@ import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/buttons/back_button.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/onboarding/presentation/screens/onboarding_screen_5.dart';
 import 'package:dishdash/features/onboarding/presentation/widgets/level_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -161,7 +162,7 @@ class _ContinueButton extends StatelessWidget {
           label: "Continue",
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const OnboardingScreen4()),
+              MaterialPageRoute(builder: (_) => const OnboardingScreen5()),
             );
           },
         ),
