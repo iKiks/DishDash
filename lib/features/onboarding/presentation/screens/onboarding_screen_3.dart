@@ -114,33 +114,33 @@ class _ActionButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ReuseableButton(
-          buttonWidth: ResponsiveSize.width(207),
-          buttonHeight: ResponsiveSize.height(45),
-          label: "I'm New",
-          isDisabled: true,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const OnboardingScreen4(),
-              ),
-            );
-          },
-        ),
-        SizedBox(height: ResponsiveSize.height(15)),
-        ReuseableButton(
-          buttonWidth: ResponsiveSize.width(207),
-          buttonHeight: ResponsiveSize.height(45),
-          label: "I've Been Here",
-          isDisabled: true,
-          onPressed: () {
-            // TODO: handle returning users
-          },
-        ),
-      ],
+    return Center(
+      child: Column(
+        children: [
+          ReuseableButton(
+            buttonWidth: ResponsiveSize.width(207),
+            buttonHeight: ResponsiveSize.height(45),
+            label: "I'm New",
+            isDisabled: true,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const OnboardingScreen4()),
+              );
+            },
+          ),
+          SizedBox(height: ResponsiveSize.height(15)),
+          ReuseableButton(
+            buttonWidth: ResponsiveSize.width(207),
+            buttonHeight: ResponsiveSize.height(45),
+            label: "I've Been Here",
+            isDisabled: true,
+            onPressed: () {
+              // TODO: handle returning users
+            },
+          ),
+        ],
+      ),
     );
   }
 }
