@@ -1,9 +1,8 @@
-import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/buttons/back_button.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
-import 'package:dishdash/features/onboarding/presentation/widgets/level_selector.dart';
+import 'package:dishdash/features/onboarding/presentation/screens/onboarding_screen_4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,8 +14,6 @@ class OnboardingScreen3 extends StatefulWidget {
 }
 
 class _OnboardingScreen3State extends State<OnboardingScreen3> {
-  int _selectedLevel = 0;
-
   @override
   void initState() {
     super.initState();
@@ -44,36 +41,18 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomBackButton(),
-              _ProgressBar(),
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: ResponsiveSize.height(20)),
-                    AppTexts(
-                      '¿What is your cooking level?',
-                      fontSize: ResponsiveSize.fontSize(20),
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(height: ResponsiveSize.height(15)),
-                    AppTexts(
-                      'Please select your cooking level for better recommendations.',
-                      fontSize: ResponsiveSize.fontSize(13),
-                      fontWeight: FontWeight.w400,
-                    ),
-                    SizedBox(height: ResponsiveSize.height(10)),
-                    LevelSelector(
-                      selectedLevel: _selectedLevel,
-                      onLevelSelected: (index) {
-                        setState(() => _selectedLevel = index);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              _ContinueButton(),
+              const CustomBackButton(),
+              SizedBox(height: ResponsiveSize.height(8)),
+
+              _HeroImage(),
+
+              SizedBox(height: ResponsiveSize.height(16)),
+
+              _WelcomeText(),
+
+              SizedBox(height: ResponsiveSize.height(20)),
+
+              _ActionButtons(context),
             ],
           ),
         ),
@@ -82,87 +61,86 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
   }
 }
 
-/* ---------------------------- PROGRESS BAR ---------------------------- */
+/* ----------------------------- HERO IMAGE ----------------------------- */
 
-class _ProgressBar extends StatelessWidget {
-  const _ProgressBar();
-
+class _HeroImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final barHeight = ResponsiveSize.height(12);
-    final barWidth = ResponsiveSize.width(230);
-    final progressWidth = ResponsiveSize.width(230 / 3);
-
-    return Center(
-      child: SizedBox(
-        height: barHeight,
-        width: barWidth,
-        child: Stack(
-          children: [_Track(barHeight), _Progress(barHeight, progressWidth)],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: ResponsiveSize.width(16)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: Image.asset(
+          'lib/core/assets/onboarding_3.png',
+          height: ResponsiveSize.height(450),
+          width: double.infinity,
+          fit: BoxFit.cover,
         ),
       ),
     );
   }
 }
 
-class _Track extends StatelessWidget {
-  final double height;
+/* ----------------------------- TEXT ---------------------------------- */
 
-  const _Track(this.height);
-
+class _WelcomeText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      decoration: BoxDecoration(
-        color: const Color(0xFFD9D9D9),
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return Column(
+      children: [
+        AppTexts(
+          "Welcome",
+          fontSize: ResponsiveSize.fontSize(25),
+          fontWeight: FontWeight.w600,
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: ResponsiveSize.height(6)),
+        AppTexts(
+          "Find the best recipes the world has to offer, with step-by-step guidance to help you improve your cooking skills.",
+          fontSize: ResponsiveSize.fontSize(13),
+          fontWeight: FontWeight.w400,
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }
 
-class _Progress extends StatelessWidget {
-  final double height;
-  final double width;
+/* ----------------------------- BUTTONS -------------------------------- */
 
-  const _Progress(this.height, this.width);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-        color: AppColors.redPink,
-        borderRadius: BorderRadius.circular(10),
-      ),
-    );
-  }
-}
-
-class _ContinueButton extends StatelessWidget {
-  const _ContinueButton();
+class _ActionButtons extends StatelessWidget {
+  final BuildContext context;
+  const _ActionButtons(this.context);
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: ResponsiveSize.height(32),
-      left: 0,
-      right: 0,
-      child: Center(
-        child: ReuseableButton(
+    return Column(
+      children: [
+        ReuseableButton(
           buttonWidth: ResponsiveSize.width(207),
-          buttonHeight: ResponsiveSize.height(40),
-          label: "Continue",
+          buttonHeight: ResponsiveSize.height(45),
+          label: "I'm New",
           isDisabled: true,
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const OnboardingScreen3()),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const OnboardingScreen4(),
+              ),
             );
           },
         ),
-      ),
+        SizedBox(height: ResponsiveSize.height(15)),
+        ReuseableButton(
+          buttonWidth: ResponsiveSize.width(207),
+          buttonHeight: ResponsiveSize.height(45),
+          label: "I've Been Here",
+          isDisabled: true,
+          onPressed: () {
+            // TODO: handle returning users
+          },
+        ),
+      ],
     );
   }
 }

@@ -20,7 +20,7 @@ class LevelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final verticalPadding = ResponsiveSize.height(12);
+    final verticalPadding = ResponsiveSize.height(9);
     final horizontalPadding = ResponsiveSize.width(17);
 
     return Material(
