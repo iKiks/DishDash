@@ -4,7 +4,6 @@ import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/buttons/overlay_back_button.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:dishdash/features/onboarding/presentation/screens/onboarding_screen_3.dart';
-import 'package:dishdash/features/onboarding/presentation/screens/onboarding_screen_4.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
