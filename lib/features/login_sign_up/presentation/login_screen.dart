@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            AppTexts(
+            AppTexts( 
               'Email',
               fontSize: ResponsiveSize.fontSize(16),
               color: AppColors.brownPod,
