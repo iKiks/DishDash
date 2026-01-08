@@ -38,7 +38,7 @@ class LevelCard extends StatelessWidget {
             border: Border.all(
               color: isSelected ? AppColors.redPink : AppColors.sweetPink,
             ),
-            color: isSelected ? AppColors.redPink.withOpacity(0.08) : null,
+            color: isSelected ? AppColors.redPink.withAlpha(20) : null,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(

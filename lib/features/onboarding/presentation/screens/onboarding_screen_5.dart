@@ -3,6 +3,7 @@ import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/buttons/back_button.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/onboarding/presentation/screens/onboarding_screen_6.dart';
 import 'package:dishdash/features/onboarding/presentation/widgets/cuisine_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -162,7 +163,11 @@ class SkipContinueButtons extends StatelessWidget {
             buttonHeight: ResponsiveSize.height(45),
             label: "Continue",
             onPressed: () {
-              // TODO: navigate to next onboarding screen
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const OnboardingScreen6(),
+                ),
+              );
             },
           ),
           const Spacer(),
