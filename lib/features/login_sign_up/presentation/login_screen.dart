@@ -10,13 +10,13 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(30.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: ResponsiveSize.height(40)),
+            SizedBox(height: ResponsiveSize.height(30)),
             Center(
               child: AppTexts(
                 'Login',
@@ -25,7 +25,8 @@ class LoginScreen extends StatelessWidget {
                 color: AppColors.redPink,
               ),
             ),
-            const Spacer(),
+
+            SizedBox(height: ResponsiveSize.height(40)),
             AppTexts(
               'Email',
               fontSize: ResponsiveSize.fontSize(16),
