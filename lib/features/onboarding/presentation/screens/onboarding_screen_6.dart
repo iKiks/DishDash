@@ -3,6 +3,7 @@ import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/buttons/back_button.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/login_screen.dart';
 import 'package:dishdash/features/onboarding/presentation/widgets/cuisine_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -154,28 +155,16 @@ class SkipContinueButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: ResponsiveSize.height(20)),
-      child: Row(
-        children: [
-          ReuseableButton(
-            buttonWidth: ResponsiveSize.width(162),
-            buttonHeight: ResponsiveSize.height(45),
-            label: "Continue",
-            onPressed: () {
-              // TODO: navigate to next onboarding screen
-            },
-          ),
-          const Spacer(),
-          ReuseableButton(
-            buttonWidth: ResponsiveSize.width(162),
-            buttonHeight: ResponsiveSize.height(45),
-            label: "Skip",
-            onPressed: () {
-              // TODO: skip onboarding
-            },
-          ),
-        ],
+    return Center(
+      child: ReuseableButton(
+        buttonWidth: ResponsiveSize.width(162),
+        buttonHeight: ResponsiveSize.height(45),
+        label: "Continue",
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => const LoginScreen()));
+        },
       ),
     );
   }
@@ -196,7 +185,7 @@ class CuisineGrid extends StatelessWidget {
     ('Milk', 'lib/core/assets/preferences/milk.png'),
     ('Eggs', 'lib/core/assets/preferences/eggs.png'),
     ('Peanuts', 'lib/core/assets/preferences/peanuts.png'),
-    ('Wheat', 'lib/core/assets/preferences/wheat.png'),
+    ('Wheat', 'lib/core/assets/preferences/whaet.png'),
     ('Shrimp', 'lib/core/assets/preferences/shrimp.png'),
     ('Tree Nuts', 'lib/core/assets/preferences/tree_nuts.png'),
     ('Shellfish', 'lib/core/assets/preferences/shellfish.png'),
