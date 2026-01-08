@@ -3,8 +3,43 @@ import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool _obscurePassword = true;
+
+  InputDecoration _buildFieldDecoration({
+    required String hintText,
+    Widget? suffix,
+  }) {
+    final baseBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(50),
+      borderSide: BorderSide.none,
+    );
+
+    return InputDecoration(
+      hintText: hintText,
+      hintStyle: TextStyle(
+        color: AppColors.brownPod.withAlpha(153),
+        fontSize: ResponsiveSize.fontSize(14),
+      ),
+      filled: true,
+      fillColor: AppColors.pink.withAlpha(77),
+      border: baseBorder,
+      enabledBorder: baseBorder,
+      focusedBorder: baseBorder,
+      contentPadding: EdgeInsets.symmetric(
+        horizontal: ResponsiveSize.width(20),
+        vertical: ResponsiveSize.height(6),
+      ),
+      suffixIcon: suffix,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +47,7 @@ class LoginScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(30.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: ResponsiveSize.height(30)),
             Center(
@@ -25,12 +58,42 @@ class LoginScreen extends StatelessWidget {
                 color: AppColors.redPink,
               ),
             ),
-
-            SizedBox(height: ResponsiveSize.height(40)),
+            SizedBox(height: ResponsiveSize.height(100)),
             AppTexts(
               'Email',
               fontSize: ResponsiveSize.fontSize(16),
               color: AppColors.brownPod,
+            ),
+            SizedBox(height: ResponsiveSize.height(8)),
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: _buildFieldDecoration(
+                hintText: 'example@example.com',
+              ),
+            ),
+            SizedBox(height: ResponsiveSize.height(24)),
+            AppTexts(
+              'Password',
+              fontSize: ResponsiveSize.fontSize(16),
+              color: AppColors.brownPod,
+            ),
+            SizedBox(height: ResponsiveSize.height(8)),
+            TextFormField(
+              obscureText: _obscurePassword,
+              decoration: _buildFieldDecoration(
+                hintText: '••••••••',
+                suffix: IconButton(
+                  onPressed: () {
+                    setState(() => _obscurePassword = !_obscurePassword);
+                  },
+                  icon: Icon(
+                    _obscurePassword
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    color: AppColors.brownPod.withOpacity(0.7),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
