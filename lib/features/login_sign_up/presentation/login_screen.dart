@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
               fontSize: ResponsiveSize.fontSize(16),
               color: AppColors.brownPod,
             ),
-          ],
+          ], 
         ),
       ),
     );
