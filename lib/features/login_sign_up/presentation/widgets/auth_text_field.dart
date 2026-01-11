@@ -15,6 +15,10 @@ class AuthTextField extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.onSaved,
+    this.textCapitalization = TextCapitalization.none,
+    this.textInputAction,
+    this.readOnly = false,
+    this.onTap,
   });
 
   final String label;
@@ -26,6 +30,10 @@ class AuthTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
   final FormFieldSetter<String>? onSaved;
+  final TextCapitalization textCapitalization;
+  final TextInputAction? textInputAction;
+  final bool readOnly;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +53,10 @@ class AuthTextField extends StatelessWidget {
           validator: validator,
           onChanged: onChanged,
           onSaved: onSaved,
+          textCapitalization: textCapitalization,
+          textInputAction: textInputAction,
+          readOnly: readOnly,
+          onTap: onTap,
           decoration: _buildFieldDecoration(),
         ),
       ],

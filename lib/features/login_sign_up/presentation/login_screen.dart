@@ -2,6 +2,7 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/sign_up_screen.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_social_row.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_text_field.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,13 @@ class _LoginScreenState extends State<LoginScreen> {
             Center(
               child: ReuseableButton(
                 label: "Sign Up",
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SignUpScreen(),
+                    ),
+                  );
+                },
                 buttonWidth: ResponsiveSize.width(207),
                 buttonHeight: ResponsiveSize.height(45),
                 isDisabled: true,
