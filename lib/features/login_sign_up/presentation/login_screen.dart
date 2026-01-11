@@ -1,5 +1,6 @@
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
+import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:flutter/material.dart';
 
@@ -95,6 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+            SizedBox(height: ResponsiveSize.height(40)),
+            ReuseableButton(label: "Login", onPressed: () {}),
           ],
         ),
       ),
