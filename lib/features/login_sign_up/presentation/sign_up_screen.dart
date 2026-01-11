@@ -2,7 +2,10 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/login_screen.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_text_field.dart';
+import 'package:dishdash/features/login_sign_up/presentation/widgets/sign_up_success_dialog.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -13,8 +16,27 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  late final TapGestureRecognizer _loginTapRecognizer;
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loginTapRecognizer = TapGestureRecognizer()..onTap = _handleLoginTap;
+  }
+
+  @override
+  void dispose() {
+    _loginTapRecognizer.dispose();
+    super.dispose();
+  }
+
+  void _handleLoginTap() {
+    Navigator.of(
+      context,
+    ).pushReplacement(MaterialPageRoute(builder: (_) => const LoginScreen()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +190,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Center(
                 child: ReuseableButton(
                   label: 'Sign Up',
-                  onPressed: () {},
+                  onPressed: _showSuccessDialog,
                   buttonWidth: ResponsiveSize.width(207),
                   buttonHeight: ResponsiveSize.height(52),
                   isDisabled: true,
@@ -186,14 +208,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: AppColors.brownPod.withAlpha(204),
                       height: 1.4,
                     ),
-                    children: const [
+                    children: [
                       TextSpan(text: 'Already have an account? '),
                       TextSpan(
-                        text: 'Login',
+                        text: 'Log In',
                         style: TextStyle(
                           color: AppColors.redPink,
                           fontWeight: FontWeight.w600,
                         ),
+                        recognizer: _loginTapRecognizer,
                       ),
                     ],
                   ),
@@ -203,6 +226,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showSuccessDialog() {
+    showGeneralDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: 'Sign up success',
+      barrierColor: Colors.transparent,
+      pageBuilder: (_, __, ___) => const SizedBox.shrink(),
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: CurvedAnimation(parent: animation, curve: Curves.easeOut),
+          child: const SignUpSuccessDialog(),
+        );
+      },
+      transitionDuration: const Duration(milliseconds: 250),
     );
   }
 }
