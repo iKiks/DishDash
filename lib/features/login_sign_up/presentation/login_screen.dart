@@ -91,12 +91,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     _obscurePassword
                         ? Icons.visibility_off_outlined
                         : Icons.visibility_outlined,
-                    color: AppColors.brownPod.withOpacity(0.7),
+                    color: AppColors.brownPod.withAlpha(179),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(40)),
+            SizedBox(height: ResponsiveSize.height(80)),
             Center(
               child: ReuseableButton(
                 label: "Login",
