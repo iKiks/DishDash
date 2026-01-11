@@ -30,6 +30,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: ResponsiveSize.height(10)),
+
+              /// Title
               Center(
                 child: AppTexts(
                   'Sign Up',
@@ -38,35 +40,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   color: AppColors.redPink,
                 ),
               ),
+
               SizedBox(height: ResponsiveSize.height(40)),
+
+              /// Full Name
               const AuthTextField(
                 label: 'Full Name',
                 hintText: 'John Doe',
                 textCapitalization: TextCapitalization.words,
                 textInputAction: TextInputAction.next,
               ),
+
               SizedBox(height: ResponsiveSize.height(24)),
+
+              /// Email
               const AuthTextField(
                 label: 'Email',
                 hintText: 'example@example.com',
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.next,
               ),
+
               SizedBox(height: ResponsiveSize.height(24)),
+
+              /// Mobile Number
               const AuthTextField(
                 label: 'Mobile Number',
-                hintText: '+ 123 456 789',
+                hintText: '+123 456 789',
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
               ),
+
               SizedBox(height: ResponsiveSize.height(24)),
+
+              /// Date of Birth
               const AuthTextField(
                 label: 'Date Of Birth',
-                hintText: 'DD / MM / YYY',
+                hintText: 'DD / MM / YYYY',
                 keyboardType: TextInputType.datetime,
                 textInputAction: TextInputAction.next,
               ),
+
               SizedBox(height: ResponsiveSize.height(24)),
+
+              /// Password
               AuthTextField(
                 label: 'Password',
                 hintText: '••••••••',
@@ -74,7 +91,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textInputAction: TextInputAction.next,
                 suffix: IconButton(
                   onPressed: () {
-                    setState(() => _obscurePassword = !_obscurePassword);
+                    setState(() {
+                      _obscurePassword = !_obscurePassword;
+                    });
                   },
                   icon: Icon(
                     _obscurePassword
@@ -84,7 +103,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
+
               SizedBox(height: ResponsiveSize.height(24)),
+
+              /// Confirm Password
               AuthTextField(
                 label: 'Confirm Password',
                 hintText: '••••••••',
@@ -92,9 +114,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 textInputAction: TextInputAction.done,
                 suffix: IconButton(
                   onPressed: () {
-                    setState(
-                      () => _obscureConfirmPassword = !_obscureConfirmPassword,
-                    );
+                    setState(() {
+                      _obscureConfirmPassword = !_obscureConfirmPassword;
+                    });
                   },
                   icon: Icon(
                     _obscureConfirmPassword
@@ -104,7 +126,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
+
               SizedBox(height: ResponsiveSize.height(32)),
+
+              /// Terms & Privacy
               Center(
                 child: RichText(
                   textAlign: TextAlign.center,
@@ -115,8 +140,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       color: AppColors.brownPod.withAlpha(204),
                       height: 1.4,
                     ),
-                    children: [
-                        const TextSpan(text: 'By continuing, you agree to\n'),
+                    children: const [
+                      TextSpan(text: 'By continuing, you agree to\n'),
                       TextSpan(
                         text: 'Terms of Use',
                         style: TextStyle(
@@ -124,7 +149,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const TextSpan(text: ' and '),
+                      TextSpan(text: ' and '),
                       TextSpan(
                         text: 'Privacy Policy.',
                         style: TextStyle(
@@ -136,7 +161,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
+
               SizedBox(height: ResponsiveSize.height(32)),
+
+              /// Sign Up Button
               Center(
                 child: ReuseableButton(
                   label: 'Sign Up',
@@ -146,31 +174,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   isDisabled: true,
                 ),
               ),
+
               SizedBox(height: ResponsiveSize.height(24)),
               Center(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AppTexts(
-                      'Already have an account? ',
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontFamily: AppFontFamily.poppins.familyName,
                       fontSize: ResponsiveSize.fontSize(12),
-                      color: AppColors.brownPod,
+                      color: AppColors.brownPod.withAlpha(204),
+                      height: 1.4,
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    children: const [
+                      TextSpan(text: 'Already have an account? '),
+                      TextSpan(
+                        text: 'Login',
+                        style: TextStyle(
+                          color: AppColors.redPink,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      child: AppTexts(
-                        'Log In',
-                        fontSize: ResponsiveSize.fontSize(12),
-                        color: AppColors.redPink,
-                        fontWeightToken: AppFontWeight.semiBold,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
