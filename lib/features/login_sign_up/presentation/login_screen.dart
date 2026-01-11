@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 isDisabled: true,
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(40)),
+            SizedBox(height: ResponsiveSize.height(30)),
             Center(
               child: ReuseableButton(
                 label: "Login",
