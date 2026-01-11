@@ -116,6 +116,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 isDisabled: true,
               ),
             ),
+            SizedBox(height: ResponsiveSize.height(60)),
+            Center(
+              child: AppTexts(
+                'Forgot Password?',
+                fontSize: ResponsiveSize.fontSize(14),
+                color: AppColors.brownPod,
+                textAlign: TextAlign.center,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
