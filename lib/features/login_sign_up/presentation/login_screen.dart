@@ -2,6 +2,7 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_social_row.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: AppColors.redPink,
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(80)),
+            SizedBox(height: ResponsiveSize.height(90)),
             AuthTextField(
               label: 'Email',
               hintText: 'example@example.com',
@@ -68,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: ResponsiveSize.height(30)),
             Center(
               child: ReuseableButton(
-                label: "Login",
+                label: "Sign Up",
                 onPressed: () {},
                 buttonWidth: ResponsiveSize.width(207),
                 buttonHeight: ResponsiveSize.height(45),
@@ -86,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(30)),
+            SizedBox(height: ResponsiveSize.height(35)),
             Center(
               child: AppTexts(
                 'or sign up with',
@@ -96,19 +97,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontWeight: FontWeight.w400,
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(30)),
+            SizedBox(height: ResponsiveSize.height(20)),
+            const Center(child: AuthSocialRow()),
+            SizedBox(height: ResponsiveSize.height(20)),
             Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('lib\core\assets\icons\instagram.png'),
-                  SizedBox(width: ResponsiveSize.width(20)),
-                  Image.asset('lib\core\assets\icons\google.png'),
-                  SizedBox(width: ResponsiveSize.width(20)),
-                  Image.asset('lib\core\assets\icons\facebook.png'),
-                  SizedBox(width: ResponsiveSize.width(20)),
-                  Image.asset('lib\core\assets\icons\whatsapp.png'),
-                ],
+              child: AppTexts(
+                'Don’t have an account? Sign Up',
+                fontSize: ResponsiveSize.fontSize(10),
+                color: AppColors.brownPod,
+                textAlign: TextAlign.center,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],
