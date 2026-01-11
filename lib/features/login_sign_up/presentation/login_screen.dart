@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: AppColors.redPink,
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(120)),
+            SizedBox(height: ResponsiveSize.height(80)),
             AppTexts(
               'Email',
               fontSize: ResponsiveSize.fontSize(16),
