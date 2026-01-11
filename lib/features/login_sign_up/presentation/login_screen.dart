@@ -2,6 +2,7 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_text_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,34 +14,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _obscurePassword = true;
-
-  InputDecoration _buildFieldDecoration({
-    required String hintText,
-    Widget? suffix,
-  }) {
-    final baseBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(50),
-      borderSide: BorderSide.none,
-    );
-
-    return InputDecoration(
-      hintText: hintText,
-      hintStyle: TextStyle(
-        color: AppColors.brownPod.withAlpha(153),
-        fontSize: ResponsiveSize.fontSize(14),
-      ),
-      filled: true,
-      fillColor: AppColors.pink.withAlpha(77),
-      border: baseBorder,
-      enabledBorder: baseBorder,
-      focusedBorder: baseBorder,
-      contentPadding: EdgeInsets.symmetric(
-        horizontal: ResponsiveSize.width(20),
-        vertical: ResponsiveSize.height(6),
-      ),
-      suffixIcon: suffix,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,43 +33,29 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             SizedBox(height: ResponsiveSize.height(80)),
-            AppTexts(
-              'Email',
-              fontSize: ResponsiveSize.fontSize(16),
-              color: AppColors.brownPod,
-            ),
-            SizedBox(height: ResponsiveSize.height(8)),
-            TextFormField(
+            AuthTextField(
+              label: 'Email',
+              hintText: 'example@example.com',
               keyboardType: TextInputType.emailAddress,
-              decoration: _buildFieldDecoration(
-                hintText: 'example@example.com',
-              ),
             ),
             SizedBox(height: ResponsiveSize.height(24)),
-            AppTexts(
-              'Password',
-              fontSize: ResponsiveSize.fontSize(16),
-              color: AppColors.brownPod,
-            ),
-            SizedBox(height: ResponsiveSize.height(8)),
-            TextFormField(
+            AuthTextField(
+              label: 'Password',
+              hintText: '••••••••',
               obscureText: _obscurePassword,
-              decoration: _buildFieldDecoration(
-                hintText: '••••••••',
-                suffix: IconButton(
-                  onPressed: () {
-                    setState(() => _obscurePassword = !_obscurePassword);
-                  },
-                  icon: Icon(
-                    _obscurePassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: AppColors.brownPod.withAlpha(179),
-                  ),
+              suffix: IconButton(
+                onPressed: () {
+                  setState(() => _obscurePassword = !_obscurePassword);
+                },
+                icon: Icon(
+                  _obscurePassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: AppColors.brownPod.withAlpha(179),
                 ),
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(80)),
+            SizedBox(height: ResponsiveSize.height(60)),
             Center(
               child: ReuseableButton(
                 label: "Login",
@@ -116,7 +75,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 isDisabled: true,
               ),
             ),
-            SizedBox(height: ResponsiveSize.height(60)),
+            SizedBox(height: ResponsiveSize.height(50)),
+
             Center(
               child: AppTexts(
                 'Forgot Password?',
@@ -124,6 +84,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: AppColors.brownPod,
                 textAlign: TextAlign.center,
                 fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: ResponsiveSize.height(30)),
+            Center(
+              child: AppTexts(
+                'or sign up with',
+                fontSize: ResponsiveSize.fontSize(10),
+                color: AppColors.brownPod,
+                textAlign: TextAlign.center,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(height: ResponsiveSize.height(30)),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('lib\core\assets\icons\instagram.png'),
+                  SizedBox(width: ResponsiveSize.width(20)),
+                  Image.asset('lib\core\assets\icons\google.png'),
+                  SizedBox(width: ResponsiveSize.width(20)),
+                  Image.asset('lib\core\assets\icons\facebook.png'),
+                  SizedBox(width: ResponsiveSize.width(20)),
+                  Image.asset('lib\core\assets\icons\whatsapp.png'),
+                ],
               ),
             ),
           ],
