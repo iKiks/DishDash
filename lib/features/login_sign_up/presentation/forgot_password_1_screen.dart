@@ -57,7 +57,9 @@ class ForgotPasswordScreen1 extends StatelessWidget {
               Center(
                 child: ReuseableButton(
                   label: 'Continue',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/forgot_password_otp_screen');
+                  },
                   buttonWidth: ResponsiveSize.width(207),
                   buttonHeight: ResponsiveSize.height(52),
                   isDisabled: true,
