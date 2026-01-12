@@ -2,6 +2,7 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/complete_profile_screen.dart';
 import 'package:dishdash/features/login_sign_up/presentation/login_screen.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_text_field.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/sign_up_success_dialog.dart';
@@ -228,10 +229,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  void _showSuccessDialog() {
+  Future<void> _showSuccessDialog() async {
     showGeneralDialog<void>(
       context: context,
-      barrierDismissible: true,
+      barrierDismissible: false,
       barrierLabel: 'Sign up success',
       barrierColor: Colors.transparent,
       pageBuilder: (_, __, ___) => const SizedBox.shrink(),
@@ -242,6 +243,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
       },
       transitionDuration: const Duration(milliseconds: 250),
+    );
+
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (!mounted) return;
+
+    await Navigator.of(context, rootNavigator: true).maybePop();
+
+    if (!mounted) return;
+
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const CompleteProfileScreen()),
     );
   }
 }

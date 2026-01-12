@@ -34,7 +34,7 @@ class CompleteProfileScreen extends StatelessWidget {
                   color: AppColors.redPink,
                 ),
               ),
-              SizedBox(height: ResponsiveSize.height(32)),
+              SizedBox(height: ResponsiveSize.height(25)),
 
               AppTexts(
                 'Complete Your Profile',
@@ -42,7 +42,7 @@ class CompleteProfileScreen extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: AppColors.brownPod,
               ),
-              SizedBox(height: ResponsiveSize.height(12)),
+              SizedBox(height: ResponsiveSize.height(8)),
 
               AppTexts(
                 'Lorem ipsum dolor sit amet pretium cras id dui pellentesque ornare. Quisque malesuada netus pulvinar diam.',
@@ -50,10 +50,10 @@ class CompleteProfileScreen extends StatelessWidget {
                 color: AppColors.brownPod.withAlpha(204),
                 height: 1.5,
               ),
-              SizedBox(height: ResponsiveSize.height(36)),
+              SizedBox(height: ResponsiveSize.height(10)),
 
               const _ProfileAvatarPlaceholder(),
-              SizedBox(height: ResponsiveSize.height(36)),
+              SizedBox(height: ResponsiveSize.height(10)),
 
               const AuthTextField(
                 label: 'Full Name',
@@ -61,14 +61,14 @@ class CompleteProfileScreen extends StatelessWidget {
                 textCapitalization: TextCapitalization.words,
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: ResponsiveSize.height(24)),
+              SizedBox(height: ResponsiveSize.height(8)),
 
               const AuthTextField(
                 label: 'Gender',
                 hintText: 'Gender',
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: ResponsiveSize.height(24)),
+              SizedBox(height: ResponsiveSize.height(8)),
 
               const AuthTextField(
                 label: 'Mobile Number',
@@ -76,7 +76,7 @@ class CompleteProfileScreen extends StatelessWidget {
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: ResponsiveSize.height(24)),
+              SizedBox(height: ResponsiveSize.height(8)),
 
               const AuthTextField(
                 label: 'Date Of Birth',
@@ -84,14 +84,15 @@ class CompleteProfileScreen extends StatelessWidget {
                 keyboardType: TextInputType.datetime,
                 textInputAction: TextInputAction.done,
               ),
-              SizedBox(height: ResponsiveSize.height(48)),
+              SizedBox(height: ResponsiveSize.height(20)),
 
-              ReuseableButton(
-                label: 'Continue',
-                onPressed: () {},
-                buttonHeight: ResponsiveSize.height(56),
-                buttonWidth: double.infinity,
-                borderRadius: 40,
+              Center(
+                child: ReuseableButton(
+                  label: 'Continue',
+                  onPressed: () {},
+                  buttonWidth: ResponsiveSize.width(207),
+                  buttonHeight: ResponsiveSize.height(52),
+                ),
               ),
             ],
           ),
@@ -106,7 +107,7 @@ class _ProfileAvatarPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double containerSize = ResponsiveSize.width(154);
+    final double containerSize = ResponsiveSize.width(100);
     final double iconSize = ResponsiveSize.width(60);
 
     return Center(
@@ -127,11 +128,11 @@ class _ProfileAvatarPlaceholder extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: ResponsiveSize.height(18),
-            right: ResponsiveSize.width(30),
+            bottom: ResponsiveSize.height(0),
+            right: ResponsiveSize.width(0),
             child: Container(
-              width: ResponsiveSize.width(40),
-              height: ResponsiveSize.width(40),
+              width: ResponsiveSize.width(30),
+              height: ResponsiveSize.width(30),
               decoration: BoxDecoration(
                 color: AppColors.redPink,
                 shape: BoxShape.circle,
