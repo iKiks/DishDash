@@ -53,7 +53,7 @@ class ForgotPasswordScreen1 extends StatelessWidget {
                 keyboardType: TextInputType.emailAddress,
                 textInputAction: TextInputAction.done,
               ),
-              SizedBox(height: ResponsiveSize.height(60)),
+              SizedBox(height: ResponsiveSize.height(370)),
               Center(
                 child: ReuseableButton(
                   label: 'Continue',
