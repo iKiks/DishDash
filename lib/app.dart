@@ -1,4 +1,5 @@
 import 'package:dishdash/features/launch/presentation/launchscreen.dart';
+import 'package:dishdash/features/login_sign_up/presentation/forgot_password_1_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'core/theme/app_colors.dart';
@@ -11,7 +12,7 @@ class DishDashApp extends StatelessWidget {
     return MaterialApp(
       title: 'DishDash',
       theme: _buildTheme(),
-      home: const Launchscreen(),
+      home: const ForgotPasswordScreen1(),
       debugShowCheckedModeBanner: false,
     );
   }
