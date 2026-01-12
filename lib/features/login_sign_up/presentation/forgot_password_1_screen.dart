@@ -2,6 +2,7 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/forgot_password_otp_screen.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -58,7 +59,11 @@ class ForgotPasswordScreen1 extends StatelessWidget {
                 child: ReuseableButton(
                   label: 'Continue',
                   onPressed: () {
-                    Navigator.pushNamed(context, '/forgot_password_otp_screen');
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const ForgotPasswordOtpScreen(),
+                      ),
+                    );
                   },
                   buttonWidth: ResponsiveSize.width(207),
                   buttonHeight: ResponsiveSize.height(52),
