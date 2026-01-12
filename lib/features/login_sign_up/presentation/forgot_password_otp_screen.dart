@@ -16,7 +16,7 @@ class ForgotPasswordOtpScreen extends StatefulWidget {
 
 class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
   static const int _otpLength = 6;
-  static const int _initialCountdown = 49;
+  static const int _initialCountdown = 50;
 
   final List<String> _digits = [];
   Timer? _timer;
@@ -29,6 +29,7 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
   }
 
   void _startCountdown() {
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted) return;
 
@@ -48,6 +49,12 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
   void _onDeletePressed() {
     if (_digits.isEmpty) return;
     setState(() => _digits.removeLast());
+  }
+
+  void _handleResend() {
+    if (_secondsRemaining > 0) return;
+    setState(() => _secondsRemaining = _initialCountdown);
+    _startCountdown();
   }
 
   void _onContinue() {
@@ -99,27 +106,30 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
               SizedBox(height: ResponsiveSize.height(32)),
 
               Center(
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: AppFontFamily.poppins.familyName,
-                      fontSize: ResponsiveSize.fontSize(13),
-                      height: 1.4,
-                      color: AppColors.brownPod.withAlpha(204),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: _secondsRemaining == 0 ? _handleResend : null,
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontFamily: AppFontFamily.poppins.familyName,
+                        fontSize: ResponsiveSize.fontSize(13),
+                        height: 1.4,
+                        color: AppColors.brownPod.withAlpha(204),
+                      ),
+                      children: [
+                        const TextSpan(
+                          text: "Didn't receive the mail?\nYou can resend it ",
+                        ),
+                        TextSpan(
+                          text: _secondsRemaining > 0
+                              ? '${_secondsRemaining.toString().padLeft(2, '0')} sec'
+                              : 'now',
+                          style: TextStyle(color: AppColors.redPink),
+                        ),
+                      ],
                     ),
-                    children: [
-                      const TextSpan(
-                        text:
-                            "Didn't receive the mail?\nYou can resend it ",
-                      ),
-                      TextSpan(
-                        text: _secondsRemaining > 0
-                            ? '${_secondsRemaining.toString().padLeft(2, '0')} sec'
-                            : 'now',
-                        style: TextStyle(color: AppColors.redPink),
-                      ),
-                    ],
                   ),
                 ),
               ),
