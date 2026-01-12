@@ -60,57 +60,67 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: ResponsiveSize.height(8)),
-              Center(
-                child: AppTexts(
-                  'Forgot Your Password',
-                  fontSize: ResponsiveSize.fontSize(22),
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.redPink,
-                ),
-              ),
-              SizedBox(height: ResponsiveSize.height(36)),
-              AppTexts(
-                "You've Got Mail",
-                fontSize: ResponsiveSize.fontSize(24),
-                fontWeight: FontWeight.w700,
-                color: AppColors.brownPod,
-              ),
-              SizedBox(height: ResponsiveSize.height(12)),
-              AppTexts(
-                'We will send you the verification code to your email address, check your email and put the code right below.',
-                fontSize: ResponsiveSize.fontSize(14),
-                color: AppColors.brownPod.withAlpha(204),
-                height: 1.5,
-              ),
-              SizedBox(height: ResponsiveSize.height(32)),
-              const _OtpFields(),
-              SizedBox(height: ResponsiveSize.height(32)),
-              Center(
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    style: TextStyle(
-                      fontFamily: AppFontFamily.poppins.familyName,
-                      fontSize: ResponsiveSize.fontSize(13),
-                      height: 1.4,
-                      color: AppColors.brownPod.withAlpha(204),
-                    ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.only(bottom: ResponsiveSize.height(24)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const TextSpan(
-                        text: "Didn't receive the mail?\nYou can resend it ",
+                      SizedBox(height: ResponsiveSize.height(8)),
+                      Center(
+                        child: AppTexts(
+                          'Forgot Your Password',
+                          fontSize: ResponsiveSize.fontSize(22),
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.redPink,
+                        ),
                       ),
-                      TextSpan(
-                        text: _secondsRemaining > 0
-                            ? 'in ${_secondsRemaining.toString().padLeft(2, '0')} sec'
-                            : 'now',
-                        style: TextStyle(color: AppColors.redPink),
+                      SizedBox(height: ResponsiveSize.height(36)),
+                      AppTexts(
+                        "You've Got Mail",
+                        fontSize: ResponsiveSize.fontSize(24),
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.brownPod,
+                      ),
+                      SizedBox(height: ResponsiveSize.height(12)),
+                      AppTexts(
+                        'We will send you the verification code to your email address, check your email and put the code right below.',
+                        fontSize: ResponsiveSize.fontSize(14),
+                        color: AppColors.brownPod.withAlpha(204),
+                        height: 1.5,
+                      ),
+                      SizedBox(height: ResponsiveSize.height(32)),
+                      const _OtpFields(),
+                      SizedBox(height: ResponsiveSize.height(32)),
+                      Center(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontFamily: AppFontFamily.poppins.familyName,
+                              fontSize: ResponsiveSize.fontSize(13),
+                              height: 1.4,
+                              color: AppColors.brownPod.withAlpha(204),
+                            ),
+                            children: [
+                              const TextSpan(
+                                text:
+                                    "Didn't receive the mail?\nYou can resend it ",
+                              ),
+                              TextSpan(
+                                text: _secondsRemaining > 0
+                                    ? 'in ${_secondsRemaining.toString().padLeft(2, '0')} sec'
+                                    : 'now',
+                                style: TextStyle(color: AppColors.redPink),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-              const Spacer(),
               Center(
                 child: ReuseableButton(
                   label: 'Continue',
@@ -120,10 +130,115 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
                   isDisabled: true,
                 ),
               ),
+              SizedBox(height: ResponsiveSize.height(24)),
+              const _NumericKeypad(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _NumericKeypad extends StatelessWidget {
+  const _NumericKeypad();
+
+  @override
+  Widget build(BuildContext context) {
+    final double rowSpacing = ResponsiveSize.height(14);
+    final double buttonHeight = ResponsiveSize.height(64);
+
+    return Column(
+      children: [
+        _KeypadRow(
+          children: [
+            _KeyButton(label: '1', height: buttonHeight),
+            _KeyButton(label: '2', height: buttonHeight),
+            _KeyButton(label: '3', height: buttonHeight),
+          ],
+        ),
+        SizedBox(height: rowSpacing),
+        _KeypadRow(
+          children: [
+            _KeyButton(label: '4', height: buttonHeight),
+            _KeyButton(label: '5', height: buttonHeight),
+            _KeyButton(label: '6', height: buttonHeight),
+          ],
+        ),
+        SizedBox(height: rowSpacing),
+        _KeypadRow(
+          children: [
+            _KeyButton(label: '7', height: buttonHeight),
+            _KeyButton(label: '8', height: buttonHeight),
+            _KeyButton(label: '9', height: buttonHeight),
+          ],
+        ),
+        SizedBox(height: rowSpacing),
+        _KeypadRow(
+          children: [
+            _KeyButton(label: '*', height: buttonHeight),
+            _KeyButton(label: '0', height: buttonHeight),
+            _KeyButton(icon: Icons.backspace_outlined, height: buttonHeight),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _KeypadRow extends StatelessWidget {
+  const _KeypadRow({required this.children});
+
+  final List<_KeyButton> children;
+
+  @override
+  Widget build(BuildContext context) {
+    final double spacing = ResponsiveSize.width(14);
+
+    return Row(
+      children: [
+        for (int index = 0; index < children.length; index++) ...[
+          Expanded(child: children[index]),
+          if (index != children.length - 1) SizedBox(width: spacing),
+        ],
+      ],
+    );
+  }
+}
+
+class _KeyButton extends StatelessWidget {
+  const _KeyButton({this.label, this.icon, required this.height});
+
+  final String? label;
+  final IconData? icon;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    final Widget content = label != null
+        ? AppTexts(
+            label!,
+            fontSize: ResponsiveSize.fontSize(20),
+            fontWeight: FontWeight.w600,
+            color: AppColors.brownPod,
+          )
+        : Icon(icon, color: AppColors.brownPod, size: ResponsiveSize.width(24));
+
+    return Container(
+      height: height,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: AppColors.redPink.withAlpha(120)),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.redPink.withAlpha(20),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Center(child: content),
     );
   }
 }
