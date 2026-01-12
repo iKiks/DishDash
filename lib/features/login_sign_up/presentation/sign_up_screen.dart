@@ -193,7 +193,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onPressed: _showSuccessDialog,
                   buttonWidth: ResponsiveSize.width(207),
                   buttonHeight: ResponsiveSize.height(52),
-                  isDisabled: true,
                 ),
               ),
 
