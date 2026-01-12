@@ -1,11 +1,49 @@
+import 'dart:async';
+
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:flutter/material.dart';
 
-class ForgotPasswordOtpScreen extends StatelessWidget {
+class ForgotPasswordOtpScreen extends StatefulWidget {
   const ForgotPasswordOtpScreen({super.key});
+
+  @override
+  State<ForgotPasswordOtpScreen> createState() =>
+      _ForgotPasswordOtpScreenState();
+}
+
+class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+  static const int _initialCountdown = 49;
+
+  late int _secondsRemaining;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _secondsRemaining = _initialCountdown;
+    _startCountdown();
+  }
+
+  void _startCountdown() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!mounted) return;
+      if (_secondsRemaining <= 1) {
+        timer.cancel();
+        setState(() => _secondsRemaining = 0);
+      } else {
+        setState(() => _secondsRemaining--);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +87,27 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
               const _OtpFields(),
               SizedBox(height: ResponsiveSize.height(32)),
               Center(
-                child: AppTexts(
-                  "Didn't receive the mail?\nYou can resend it in 49 sec",
-                  fontSize: ResponsiveSize.fontSize(13),
-                  height: 1.4,
-                  color: AppColors.brownPod.withAlpha(204),
+                child: RichText(
                   textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontFamily: AppFontFamily.poppins.familyName,
+                      fontSize: ResponsiveSize.fontSize(13),
+                      height: 1.4,
+                      color: AppColors.brownPod.withAlpha(204),
+                    ),
+                    children: [
+                      const TextSpan(
+                        text: "Didn't receive the mail?\nYou can resend it ",
+                      ),
+                      TextSpan(
+                        text: _secondsRemaining > 0
+                            ? 'in ${_secondsRemaining.toString().padLeft(2, '0')} sec'
+                            : 'now',
+                        style: TextStyle(color: AppColors.redPink),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const Spacer(),
@@ -80,26 +133,6 @@ class _OtpFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double fieldSize = ResponsiveSize.width(40);
-
-    Widget buildCircle(String digit) {
-      return Container(
-        width: fieldSize,
-        height: fieldSize,
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          border: Border.all(color: AppColors.redPink, width: 1.5),
-        ),
-        child: AppTexts(
-          digit,
-          fontSize: ResponsiveSize.fontSize(20),
-          fontWeight: FontWeight.w600,
-          color: AppColors.brownPod,
-        ),
-      );
-    }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: const [
