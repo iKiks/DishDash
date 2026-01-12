@@ -80,7 +80,7 @@ class _OtpFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double fieldSize = ResponsiveSize.width(56);
+    final double fieldSize = ResponsiveSize.width(40);
 
     Widget buildCircle(String digit) {
       return Container(
@@ -121,7 +121,7 @@ class _StaticDigit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double fieldSize = ResponsiveSize.width(56);
+    final double fieldSize = ResponsiveSize.width(40);
 
     return Container(
       width: fieldSize,
