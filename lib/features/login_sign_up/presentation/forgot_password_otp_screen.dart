@@ -1,10 +1,10 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
-import 'package:flutter/material.dart';
 
 class ForgotPasswordOtpScreen extends StatefulWidget {
   const ForgotPasswordOtpScreen({super.key});
@@ -15,28 +15,47 @@ class ForgotPasswordOtpScreen extends StatefulWidget {
 }
 
 class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
+  static const int _otpLength = 6;
   static const int _initialCountdown = 49;
 
-  late int _secondsRemaining;
+  final List<String> _digits = [];
   Timer? _timer;
+  int _secondsRemaining = _initialCountdown;
 
   @override
   void initState() {
     super.initState();
-    _secondsRemaining = _initialCountdown;
     _startCountdown();
   }
 
   void _startCountdown() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (!mounted) return;
-      if (_secondsRemaining <= 1) {
+
+      if (_secondsRemaining == 0) {
         timer.cancel();
-        setState(() => _secondsRemaining = 0);
       } else {
         setState(() => _secondsRemaining--);
       }
     });
+  }
+
+  void _onDigitPressed(String digit) {
+    if (_digits.length >= _otpLength) return;
+    setState(() => _digits.add(digit));
+  }
+
+  void _onDeletePressed() {
+    if (_digits.isEmpty) return;
+    setState(() => _digits.removeLast());
+  }
+
+  void _onContinue() {
+    if (_digits.length != _otpLength) return;
+
+    final otp = _digits.join();
+    debugPrint('OTP entered: $otp');
+    // TODO: submit OTP to backend
   }
 
   @override
@@ -55,83 +74,71 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: ResponsiveSize.width(30),
-            vertical: ResponsiveSize.height(28),
+            vertical: ResponsiveSize.height(24),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: EdgeInsets.only(bottom: ResponsiveSize.height(24)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              AppTexts(
+                'Forgot Your Password',
+                fontSize: ResponsiveSize.fontSize(22),
+                fontWeight: FontWeight.w600,
+              ),
+              SizedBox(height: ResponsiveSize.height(12)),
+              AppTexts(
+                'We’ve sent a verification code to your email. Enter it below.',
+                fontSize: ResponsiveSize.fontSize(14),
+                height: 1.5,
+                color: AppColors.brownPod.withAlpha(200),
+              ),
+
+              SizedBox(height: ResponsiveSize.height(32)),
+
+              _OtpFields(digits: _digits, length: _otpLength),
+
+              SizedBox(height: ResponsiveSize.height(32)),
+
+              Center(
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontFamily: AppFontFamily.poppins.familyName,
+                      fontSize: ResponsiveSize.fontSize(13),
+                      height: 1.4,
+                      color: AppColors.brownPod.withAlpha(204),
+                    ),
                     children: [
-                      SizedBox(height: ResponsiveSize.height(8)),
-                      Center(
-                        child: AppTexts(
-                          'Forgot Your Password',
-                          fontSize: ResponsiveSize.fontSize(22),
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.redPink,
-                        ),
+                      const TextSpan(
+                        text:
+                            "Didn't receive the mail?\nYou can resend it ",
                       ),
-                      SizedBox(height: ResponsiveSize.height(36)),
-                      AppTexts(
-                        "You've Got Mail",
-                        fontSize: ResponsiveSize.fontSize(24),
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.brownPod,
-                      ),
-                      SizedBox(height: ResponsiveSize.height(12)),
-                      AppTexts(
-                        'We will send you the verification code to your email address, check your email and put the code right below.',
-                        fontSize: ResponsiveSize.fontSize(14),
-                        color: AppColors.brownPod.withAlpha(204),
-                        height: 1.5,
-                      ),
-                      SizedBox(height: ResponsiveSize.height(32)),
-                      const _OtpFields(),
-                      SizedBox(height: ResponsiveSize.height(32)),
-                      Center(
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                            style: TextStyle(
-                              fontFamily: AppFontFamily.poppins.familyName,
-                              fontSize: ResponsiveSize.fontSize(13),
-                              height: 1.4,
-                              color: AppColors.brownPod.withAlpha(204),
-                            ),
-                            children: [
-                              const TextSpan(
-                                text:
-                                    "Didn't receive the mail?\nYou can resend it ",
-                              ),
-                              TextSpan(
-                                text: _secondsRemaining > 0
-                                    ? 'in ${_secondsRemaining.toString().padLeft(2, '0')} sec'
-                                    : 'now',
-                                style: TextStyle(color: AppColors.redPink),
-                              ),
-                            ],
-                          ),
-                        ),
+                      TextSpan(
+                        text: _secondsRemaining > 0
+                            ? '${_secondsRemaining.toString().padLeft(2, '0')} sec'
+                            : 'now',
+                        style: TextStyle(color: AppColors.redPink),
                       ),
                     ],
                   ),
                 ),
               ),
-              Center(
-                child: ReuseableButton(
-                  label: 'Continue',
-                  onPressed: () {},
-                  buttonWidth: ResponsiveSize.width(207),
-                  buttonHeight: ResponsiveSize.height(52),
-                  isDisabled: true,
-                ),
+
+              const Spacer(),
+
+              _NumericKeypad(
+                onDigitPressed: _onDigitPressed,
+                onDeletePressed: _onDeletePressed,
               ),
+
               SizedBox(height: ResponsiveSize.height(24)),
-              const _NumericKeypad(),
+
+              ReuseableButton(
+                label: 'Continue',
+                onPressed: _onContinue,
+                isDisabled: _digits.length != _otpLength,
+                buttonHeight: ResponsiveSize.height(52),
+              ),
             ],
           ),
         ),
@@ -140,150 +147,128 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
   }
 }
 
-class _NumericKeypad extends StatelessWidget {
-  const _NumericKeypad();
+class _OtpFields extends StatelessWidget {
+  const _OtpFields({required this.digits, required this.length});
+
+  final List<String> digits;
+  final int length;
 
   @override
   Widget build(BuildContext context) {
-    final double rowSpacing = ResponsiveSize.height(14);
-    final double buttonHeight = ResponsiveSize.height(64);
+    final double size = ResponsiveSize.width(44);
 
-    return Column(
-      children: [
-        _KeypadRow(
-          children: [
-            _KeyButton(label: '1', height: buttonHeight),
-            _KeyButton(label: '2', height: buttonHeight),
-            _KeyButton(label: '3', height: buttonHeight),
-          ],
-        ),
-        SizedBox(height: rowSpacing),
-        _KeypadRow(
-          children: [
-            _KeyButton(label: '4', height: buttonHeight),
-            _KeyButton(label: '5', height: buttonHeight),
-            _KeyButton(label: '6', height: buttonHeight),
-          ],
-        ),
-        SizedBox(height: rowSpacing),
-        _KeypadRow(
-          children: [
-            _KeyButton(label: '7', height: buttonHeight),
-            _KeyButton(label: '8', height: buttonHeight),
-            _KeyButton(label: '9', height: buttonHeight),
-          ],
-        ),
-        SizedBox(height: rowSpacing),
-        _KeypadRow(
-          children: [
-            _KeyButton(label: '*', height: buttonHeight),
-            _KeyButton(label: '0', height: buttonHeight),
-            _KeyButton(icon: Icons.backspace_outlined, height: buttonHeight),
-          ],
-        ),
-      ],
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(length, (index) {
+        final hasValue = index < digits.length;
+        final isActive = index == digits.length && digits.length < length;
+
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          width: size,
+          height: size,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: AppColors.redPink,
+              width: isActive ? 2 : 1.5,
+            ),
+            color: hasValue ? AppColors.redPink.withAlpha(30) : AppColors.white,
+          ),
+          child: hasValue
+              ? AppTexts(
+                  digits[index],
+                  fontSize: ResponsiveSize.fontSize(18),
+                  fontWeight: FontWeight.w600,
+                )
+              : const SizedBox.shrink(),
+        );
+      }),
     );
   }
 }
 
-class _KeypadRow extends StatelessWidget {
-  const _KeypadRow({required this.children});
+class _NumericKeypad extends StatelessWidget {
+  const _NumericKeypad({
+    required this.onDigitPressed,
+    required this.onDeletePressed,
+  });
 
-  final List<_KeyButton> children;
+  final ValueChanged<String> onDigitPressed;
+  final VoidCallback onDeletePressed;
 
   @override
   Widget build(BuildContext context) {
-    final double spacing = ResponsiveSize.width(14);
+    final double height = ResponsiveSize.height(64);
+    final double spacing = ResponsiveSize.height(14);
 
-    return Row(
+    Widget row(List<Widget> children) => Row(
+      children: children.map((e) => Expanded(child: e)).toList(growable: false),
+    );
+
+    Widget key(String value) => _KeyButton(
+      height: height,
+      label: value,
+      onTap: () => onDigitPressed(value),
+    );
+
+    return Column(
       children: [
-        for (int index = 0; index < children.length; index++) ...[
-          Expanded(child: children[index]),
-          if (index != children.length - 1) SizedBox(width: spacing),
-        ],
+        row([key('1'), key('2'), key('3')]),
+        SizedBox(height: spacing),
+        row([key('4'), key('5'), key('6')]),
+        SizedBox(height: spacing),
+        row([key('7'), key('8'), key('9')]),
+        SizedBox(height: spacing),
+        row([
+          const SizedBox(),
+          key('0'),
+          _KeyButton(
+            height: height,
+            icon: Icons.backspace_outlined,
+            onTap: onDeletePressed,
+          ),
+        ]),
       ],
     );
   }
 }
 
 class _KeyButton extends StatelessWidget {
-  const _KeyButton({this.label, this.icon, required this.height});
+  const _KeyButton({
+    this.label,
+    this.icon,
+    required this.height,
+    required this.onTap,
+  });
 
   final String? label;
   final IconData? icon;
   final double height;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final Widget content = label != null
-        ? AppTexts(
-            label!,
-            fontSize: ResponsiveSize.fontSize(20),
-            fontWeight: FontWeight.w600,
-            color: AppColors.brownPod,
-          )
-        : Icon(icon, color: AppColors.brownPod, size: ResponsiveSize.width(24));
-
-    return Container(
-      height: height,
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.redPink.withAlpha(120)),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.redPink.withAlpha(20),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Center(child: content),
-    );
-  }
-}
-
-class _OtpFields extends StatelessWidget {
-  const _OtpFields();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: const [
-        _StaticDigit('2'),
-        _StaticDigit('7'),
-        _StaticDigit('3'),
-        _StaticDigit('9'),
-        _StaticDigit('1'),
-        _StaticDigit('6'),
-      ],
-    );
-  }
-}
-
-class _StaticDigit extends StatelessWidget {
-  const _StaticDigit(this.digit);
-
-  final String digit;
-
-  @override
-  Widget build(BuildContext context) {
-    final double fieldSize = ResponsiveSize.width(40);
-
-    return Container(
-      width: fieldSize,
-      height: fieldSize,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: AppColors.redPink, width: 1.5),
-      ),
-      child: AppTexts(
-        digit,
-        fontSize: ResponsiveSize.fontSize(20),
-        fontWeight: FontWeight.w600,
-        color: AppColors.brownPod,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: height,
+        margin: EdgeInsets.symmetric(horizontal: ResponsiveSize.width(6)),
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppColors.redPink.withAlpha(120)),
+        ),
+        child: Center(
+          child: label != null
+              ? AppTexts(
+                  label!,
+                  fontSize: ResponsiveSize.fontSize(20),
+                  fontWeight: FontWeight.w600,
+                )
+              : Icon(icon, size: 24),
+        ),
       ),
     );
   }
