@@ -6,4 +6,6 @@ class HiveStorage {
   static Future<void> init() async {
     await Hive.openBox(_authBox);
   }
+  static Box get authBox => Hive.box(_authBox);
+  
 }
