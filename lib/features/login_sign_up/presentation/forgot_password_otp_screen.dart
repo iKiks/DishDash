@@ -5,6 +5,7 @@ import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/buttons/app_buttons.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
+import 'package:dishdash/features/login_sign_up/presentation/create_new_password_screen.dart';
 
 class ForgotPasswordOtpScreen extends StatefulWidget {
   const ForgotPasswordOtpScreen({super.key});
@@ -62,7 +63,10 @@ class _ForgotPasswordOtpScreenState extends State<ForgotPasswordOtpScreen> {
 
     final otp = _digits.join();
     debugPrint('OTP entered: $otp');
-    // TODO: submit OTP to backend
+
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const CreateNewPasswordScreen()));
   }
 
   @override
