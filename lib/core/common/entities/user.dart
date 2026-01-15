@@ -5,7 +5,7 @@ class User {
   final String? phoneNumber;
   final DateTime? dateOfBirth;
 
-  User({
+  const User({
     required this.id,
     required this.name,
     required this.email,
