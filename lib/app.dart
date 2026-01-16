@@ -1,6 +1,8 @@
-import 'package:dishdash/features/launch/presentation/launchscreen.dart';
 import 'package:dishdash/features/login_sign_up/presentation/forgot_password_1_screen.dart';
+import 'package:dishdash/features/login_sign_up/presentation/bloc/auth_bloc.dart';
+import 'package:dishdash/features/login_sign_up/presentation/bloc/auth_bloc_factory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/theme/app_colors.dart';
 
@@ -9,11 +11,14 @@ class DishDashApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DishDash',
-      theme: _buildTheme(),
-      home: const ForgotPasswordScreen1(),
-      debugShowCheckedModeBanner: false,
+    return BlocProvider<AuthBloc>(
+      create: (_) => AuthBlocFactory.create(),
+      child: MaterialApp(
+        title: 'DishDash',
+        theme: _buildTheme(),
+        home: const ForgotPasswordScreen1(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 
