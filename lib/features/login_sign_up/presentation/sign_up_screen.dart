@@ -50,6 +50,7 @@ class _SignUpViewState extends State<_SignUpView> {
   @override
   void initState() {
     super.initState();
+    print('[SignUpScreen] initState');
     _loginTapRecognizer = TapGestureRecognizer()..onTap = _handleLoginTap;
 
     _fullNameController = TextEditingController()
@@ -67,6 +68,7 @@ class _SignUpViewState extends State<_SignUpView> {
 
   @override
   void dispose() {
+    print('[SignUpScreen] dispose');
     _loginTapRecognizer.dispose();
     _fullNameController
       ..removeListener(_updateFormValidity)
@@ -90,6 +92,7 @@ class _SignUpViewState extends State<_SignUpView> {
   }
 
   void _handleLoginTap() {
+    print('[SignUpScreen] Login link tapped');
     if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
     } else {
@@ -109,10 +112,14 @@ class _SignUpViewState extends State<_SignUpView> {
         _confirmPasswordController.text.isNotEmpty;
 
     final isValid = requiredFieldsFilled && passwordsMatch;
-    if (isValid != _isFormValid) setState(() => _isFormValid = isValid);
+    if (isValid != _isFormValid) {
+      setState(() => _isFormValid = isValid);
+      print('[SignUpScreen] Form validity changed: $isValid');
+    }
   }
 
   DateTime? _parseDateOfBirth(String value) {
+    print('[SignUpScreen] Parsing date of birth value: $value');
     try {
       final sanitized = value.replaceAll(' ', '');
       final parts = sanitized.split(RegExp(r'[-/]'));
@@ -128,16 +135,25 @@ class _SignUpViewState extends State<_SignUpView> {
 
       return date;
     } catch (_) {
+      print('[SignUpScreen] Date of birth parse failed for value: $value');
       return null;
     }
   }
 
   Future<void> _onSignUpPressed() async {
+    print('[SignUpScreen] Sign up button pressed');
     final authBloc = context.read<AuthBloc>();
-    if (authBloc.state.signUpStatus == RequestStatus.loading) return;
-    if (!_formKey.currentState!.validate()) return;
+    if (authBloc.state.signUpStatus == RequestStatus.loading) {
+      print('[SignUpScreen] Sign up already in progress, ignoring');
+      return;
+    }
+    if (!_formKey.currentState!.validate()) {
+      print('[SignUpScreen] Form validation failed');
+      return;
+    }
 
     FocusScope.of(context).unfocus();
+    print('[SignUpScreen] Dispatching SignUpSubmitted for ${_emailController.text.trim()}');
 
     final user = User(
       id: '',
@@ -167,12 +183,14 @@ class _SignUpViewState extends State<_SignUpView> {
 
         if (state.signUpStatus == RequestStatus.failure &&
             state.errorMessage != null) {
+          print('[SignUpScreen] Sign up failed: ${state.errorMessage}');
           ScaffoldMessenger.of(ctx)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text(state.errorMessage!)));
         }
 
         if (state.signUpStatus == RequestStatus.success) {
+          print('[SignUpScreen] Sign up success received');
           await _showSuccessDialog();
 
           if (!mounted) return;
@@ -387,6 +405,7 @@ class _SignUpViewState extends State<_SignUpView> {
   }
 
   Future<void> _showSuccessDialog() async {
+    print('[SignUpScreen] Showing success dialog');
     showGeneralDialog<void>(
       context: context,
       barrierDismissible: false,
@@ -407,5 +426,6 @@ class _SignUpViewState extends State<_SignUpView> {
     if (!mounted) return;
 
     await Navigator.of(context, rootNavigator: true).maybePop();
+    print('[SignUpScreen] Success dialog dismissed');
   }
 }

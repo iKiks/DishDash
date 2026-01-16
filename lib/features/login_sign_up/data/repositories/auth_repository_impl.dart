@@ -10,11 +10,13 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<String> login({required String email, required String password}) {
+    print('[AuthRepositoryImpl.login] Forwarding login for $email');
     return _remoteDatasource.login(email, password);
   }
 
   @override
   Future<void> signUp({required User user, required String password}) {
+    print('[AuthRepositoryImpl.signUp] Forwarding sign up for ${user.email}');
     return _remoteDatasource.signUp(user, password);
   }
 }

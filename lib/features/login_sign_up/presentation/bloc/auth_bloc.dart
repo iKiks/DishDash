@@ -75,6 +75,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LoginSubmitted event,
     Emitter<AuthState> emit,
   ) async {
+    print('[AuthBloc] LoginSubmitted received for ${event.email}');
     emit(
       state.copyWith(loginStatus: RequestStatus.loading, errorMessage: null),
     );
@@ -83,6 +84,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final token = await _loginUseCase(
         LoginParams(email: event.email, password: event.password),
       );
+      print('[AuthBloc] Login succeeded for ${event.email}');
       emit(
         state.copyWith(
           loginStatus: RequestStatus.success,
@@ -91,6 +93,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         ),
       );
     } catch (error) {
+      print('[AuthBloc] Login failed for ${event.email}: $error');
       emit(
         state.copyWith(
           loginStatus: RequestStatus.failure,
@@ -104,6 +107,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     SignUpSubmitted event,
     Emitter<AuthState> emit,
   ) async {
+    print('[AuthBloc] SignUpSubmitted received for ${event.user.email}');
     emit(
       state.copyWith(signUpStatus: RequestStatus.loading, errorMessage: null),
     );
@@ -112,11 +116,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _signUpUseCase(
         SignUpParams(user: event.user, password: event.password),
       );
+      print('[AuthBloc] Sign up succeeded for ${event.user.email}');
 
       emit(
         state.copyWith(signUpStatus: RequestStatus.success, errorMessage: null),
       );
     } catch (error) {
+      print('[AuthBloc] Sign up failed for ${event.user.email}: $error');
       emit(
         state.copyWith(
           signUpStatus: RequestStatus.failure,
@@ -127,10 +133,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _handleStatusCleared(AuthStatusCleared event, Emitter<AuthState> emit) {
+    print('[AuthBloc] AuthStatusCleared received');
     emit(const AuthState());
   }
 
   String _mapErrorMessage(Object error) {
+    print('[AuthBloc] Mapping error: $error');
     if (error is DioException) {
       final responseData = error.response?.data;
       if (responseData is Map<String, dynamic>) {

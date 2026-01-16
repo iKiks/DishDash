@@ -16,25 +16,31 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
   @override
   Future<String> login(String email, String password) async {
-    // Implement your remote login logic here
-    // For example, make an HTTP request to your backend
-    // and return the authentication token
+    print('[RemoteDatasourceImpl.login] Initiating login for $email');
     final loginResponse = await _apiClient
         .post<Map<String, dynamic>>(
           '/login',
           data: {'email': email, 'password': password},
         )
-        .then((response) => response.data!);
+        .then((response) {
+      print('[RemoteDatasourceImpl.login] Response received for $email');
+      return response.data!;
+    }).catchError((error) {
+      print('[RemoteDatasourceImpl.login] Request failed for $email: $error');
+      throw error;
+    });
 
     await _secureStorage.write(
       key: 'accessToken',
       value: loginResponse['accessToken'],
     );
+    print('[RemoteDatasourceImpl.login] Stored access token for $email');
     return loginResponse['accessToken'];
   }
 
   @override
   Future<void> signUp(User user, String password) async {
+    print('[RemoteDatasourceImpl.signUp] Preparing payload for ${user.email}');
     final userModel = UserModel.fromEntity(user);
     final payload = <String, dynamic>{
       'name': userModel.name,
@@ -48,11 +54,19 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
     final response = await _apiClient
         .post<Map<String, dynamic>>('/signup', data: payload)
-        .then((value) => value.data ?? <String, dynamic>{});
+        .then((value) {
+      print('[RemoteDatasourceImpl.signUp] Response received for ${user.email}');
+      return value.data ?? <String, dynamic>{};
+    }).catchError((error) {
+      print('[RemoteDatasourceImpl.signUp] Request failed for ${user.email}: $error');
+      throw error;
+    });
     if (response['success'] != true) {
+      print('[RemoteDatasourceImpl.signUp] Sign up reported failure for ${user.email}: ${response['message']}');
       throw Exception(
         'Sign up failed: ${response['message'] ?? 'Unknown error'}',
       );
     }
+    print('[RemoteDatasourceImpl.signUp] Sign up completed for ${user.email}');
   }
 }
