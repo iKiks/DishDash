@@ -80,7 +80,9 @@ class _LoginScreenViewState extends State<_LoginScreenView> {
     }
 
     FocusScope.of(context).unfocus();
-    print('[LoginScreen] Dispatching LoginSubmitted for ${_emailController.text.trim()}');
+    print(
+      '[LoginScreen] Dispatching LoginSubmitted for ${_emailController.text.trim()}',
+    );
 
     context.read<AuthBloc>().add(
       LoginSubmitted(

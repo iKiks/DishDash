@@ -13,7 +13,9 @@ class AuthBlocFactory {
   static AuthBloc create() {
     print('[AuthBlocFactory] Creating AuthBloc');
     final apiClient = ApiClient(baseUrl: AppConfig.apiBaseUrl);
-    print('[AuthBlocFactory] ApiClient initialized with baseUrl ${AppConfig.apiBaseUrl}');
+    print(
+      '[AuthBlocFactory] ApiClient initialized with baseUrl ${AppConfig.apiBaseUrl}',
+    );
     final remoteDatasource = RemoteDatasourceImpl(apiClient: apiClient);
     final repository = AuthRepositoryImpl(remoteDatasource: remoteDatasource);
 

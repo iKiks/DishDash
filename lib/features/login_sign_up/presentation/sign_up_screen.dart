@@ -153,7 +153,9 @@ class _SignUpViewState extends State<_SignUpView> {
     }
 
     FocusScope.of(context).unfocus();
-    print('[SignUpScreen] Dispatching SignUpSubmitted for ${_emailController.text.trim()}');
+    print(
+      '[SignUpScreen] Dispatching SignUpSubmitted for ${_emailController.text.trim()}',
+    );
 
     final user = User(
       id: '',
