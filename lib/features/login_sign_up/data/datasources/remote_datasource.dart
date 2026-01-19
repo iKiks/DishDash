@@ -89,7 +89,7 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       print(
         '[RemoteDatasourceImpl.signUp] Non-success status $statusCode for ${user.email}: $message',
       );
-      throw Exception('Sign up fail ed: $message');
+      throw Exception('Sign up failed: $message');
     }
 
     if (successFlag is bool && !successFlag) {
