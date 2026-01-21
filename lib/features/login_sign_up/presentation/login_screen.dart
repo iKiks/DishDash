@@ -8,6 +8,7 @@ import 'package:dishdash/features/login_sign_up/presentation/sign_up_screen.dart
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_social_row.dart';
 import 'package:dishdash/features/login_sign_up/presentation/widgets/auth_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -39,7 +40,7 @@ class _LoginScreenViewState extends State<_LoginScreenView> {
   @override
   void initState() {
     super.initState();
-    print('[LoginScreen] initState');
+    debugPrint('[LoginScreen] initState');
     _emailController = TextEditingController()
       ..addListener(_updateFormValidity);
     _passwordController = TextEditingController()
@@ -48,7 +49,7 @@ class _LoginScreenViewState extends State<_LoginScreenView> {
 
   @override
   void dispose() {
-    print('[LoginScreen] dispose');
+    debugPrint('[LoginScreen] dispose');
     _emailController
       ..removeListener(_updateFormValidity)
       ..dispose();
@@ -63,24 +64,24 @@ class _LoginScreenViewState extends State<_LoginScreenView> {
         _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
     if (isValid != _isFormValid) {
       setState(() => _isFormValid = isValid);
-      print('[LoginScreen] Form validity changed: $_isFormValid');
+      debugPrint('[LoginScreen] Form validity changed: $_isFormValid');
     }
   }
 
   Future<void> _onLoginPressed() async {
-    print('[LoginScreen] Login button pressed');
+    debugPrint('[LoginScreen] Login button pressed');
     if (context.read<AuthBloc>().state.loginStatus == RequestStatus.loading) {
-      print('[LoginScreen] Login already in progress, ignoring');
+      debugPrint('[LoginScreen] Login already in progress, ignoring');
       return;
     }
 
     if (!_formKey.currentState!.validate()) {
-      print('[LoginScreen] Form validation failed');
+      debugPrint('[LoginScreen] Form validation failed');
       return;
     }
 
     FocusScope.of(context).unfocus();
-    print(
+    debugPrint(
       '[LoginScreen] Dispatching LoginSubmitted for ${_emailController.text.trim()}',
     );
 
@@ -104,14 +105,14 @@ class _LoginScreenViewState extends State<_LoginScreenView> {
         if (!mounted) return;
         if (state.loginStatus == RequestStatus.failure &&
             state.errorMessage != null) {
-          print('[LoginScreen] Login failed: ${state.errorMessage}');
+          debugPrint('[LoginScreen] Login failed: ${state.errorMessage}');
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text(state.errorMessage!)));
         }
 
         if (state.loginStatus == RequestStatus.success) {
-          print('[LoginScreen] Login success received');
+          debugPrint('[LoginScreen] Login success received');
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(const SnackBar(content: Text('Login successful')));
@@ -194,7 +195,7 @@ class _LoginScreenViewState extends State<_LoginScreenView> {
                     child: ReuseableButton(
                       label: 'Sign Up',
                       onPressed: () {
-                        print('[LoginScreen] Navigating to SignUpScreen');
+                          debugPrint('[LoginScreen] Navigating to SignUpScreen');
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => BlocProvider.value(
