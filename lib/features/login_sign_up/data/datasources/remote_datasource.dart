@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:dishdash/core/common/entities/user.dart';
 import 'package:dishdash/core/network/api_client.dart';
+import 'package:dishdash/core/utils/app_logger.dart';
 import 'package:dishdash/features/login_sign_up/data/models/user_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+const _accessTokenStorageKey = 'accessToken';
+const _logName = 'DishDash.RemoteDatasource';
 
 abstract interface class RemoteDatasource {
   Future<String> login(String email, String password);
@@ -18,22 +22,32 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
   @override
   Future<String> login(String email, String password) async {
-    print('[RemoteDatasourceImpl.login] Initiating login for $email');
-    final response = await _apiClient
-        .post<dynamic>(
+    AppLogger.d(
+      '[RemoteDatasourceImpl.login] Initiating login for $email',
+      name: _logName,
+    );
+
+    final response = await () async {
+      try {
+        final result = await _apiClient.post<dynamic>(
           '/login',
           data: {'email': email, 'password': password},
-        )
-        .then((value) {
-          print('[RemoteDatasourceImpl.login] Response received for $email');
-          return value;
-        })
-        .catchError((error) {
-          print(
-            '[RemoteDatasourceImpl.login] Request failed for $email: $error',
-          );
-          throw error;
-        });
+        );
+        AppLogger.d(
+          '[RemoteDatasourceImpl.login] Response received for $email',
+          name: _logName,
+        );
+        return result;
+      } on Object catch (error, stackTrace) {
+        AppLogger.e(
+          '[RemoteDatasourceImpl.login] Request failed for $email',
+          name: _logName,
+          error: error,
+          stackTrace: stackTrace,
+        );
+        rethrow;
+      }
+    }();
 
     final responseData = _normalizeResponseData(response.data);
 
@@ -42,18 +56,27 @@ class RemoteDatasourceImpl implements RemoteDatasource {
         responseData['token']?.toString();
 
     if (token == null || token.isEmpty) {
-      print('[RemoteDatasourceImpl.login] Missing access token for $email');
+      AppLogger.w(
+        '[RemoteDatasourceImpl.login] Missing access token for $email',
+        name: _logName,
+      );
       throw Exception('Login failed: Missing access token');
     }
 
-    await _secureStorage.write(key: 'accessToken', value: token);
-    print('[RemoteDatasourceImpl.login] Stored access token for $email');
+    await _secureStorage.write(key: _accessTokenStorageKey, value: token);
+    AppLogger.d(
+      '[RemoteDatasourceImpl.login] Stored access token for $email',
+      name: _logName,
+    );
     return token;
   }
 
   @override
   Future<void> signUp(User user, String password) async {
-    print('[RemoteDatasourceImpl.signUp] Preparing payload for ${user.email}');
+    AppLogger.d(
+      '[RemoteDatasourceImpl.signUp] Preparing payload for ${user.email}',
+      name: _logName,
+    );
     final userModel = UserModel.fromEntity(user);
     final payload = <String, dynamic>{
       'fullName': userModel.name,
@@ -65,20 +88,24 @@ class RemoteDatasourceImpl implements RemoteDatasource {
         'dateOfBirth': userModel.dateOfBirth!.toIso8601String(),
     };
 
-    final response = await _apiClient
-        .post<dynamic>('/register', data: payload)
-        .then((value) {
-          print(
-            '[RemoteDatasourceImpl.signUp] Response received for ${user.email}',
-          );
-          return value;
-        })
-        .catchError((error) {
-          print(
-            '[RemoteDatasourceImpl.signUp] Request failed for ${user.email}: $error',
-          );
-          throw error;
-        });
+    final response = await () async {
+      try {
+        final result = await _apiClient.post<dynamic>('/register', data: payload);
+        AppLogger.d(
+          '[RemoteDatasourceImpl.signUp] Response received for ${user.email}',
+          name: _logName,
+        );
+        return result;
+      } on Object catch (error, stackTrace) {
+        AppLogger.e(
+          '[RemoteDatasourceImpl.signUp] Request failed for ${user.email}',
+          name: _logName,
+          error: error,
+          stackTrace: stackTrace,
+        );
+        rethrow;
+      }
+    }();
 
     final responseData = _normalizeResponseData(response.data);
     final statusCode = response.statusCode ?? 0;
@@ -86,16 +113,18 @@ class RemoteDatasourceImpl implements RemoteDatasource {
 
     if (statusCode < 200 || statusCode >= 300) {
       final message = responseData['message'] ?? 'Unknown error';
-      print(
+      AppLogger.w(
         '[RemoteDatasourceImpl.signUp] Non-success status $statusCode for ${user.email}: $message',
+        name: _logName,
       );
       throw Exception('Sign up failed: $message');
     }
 
     if (successFlag is bool && !successFlag) {
       final message = responseData['message'] ?? 'Unknown error';
-      print(
+      AppLogger.w(
         '[RemoteDatasourceImpl.signUp] Sign up reported failure for ${user.email}: $message',
+        name: _logName,
       );
       throw Exception('Sign up failed: $message');
     }
@@ -104,13 +133,17 @@ class RemoteDatasourceImpl implements RemoteDatasource {
         responseData['accessToken']?.toString() ??
         responseData['token']?.toString();
     if (accessToken != null && accessToken.isNotEmpty) {
-      await _secureStorage.write(key: 'accessToken', value: accessToken);
-      print(
+      await _secureStorage.write(key: _accessTokenStorageKey, value: accessToken);
+      AppLogger.d(
         '[RemoteDatasourceImpl.signUp] Stored access token for ${user.email}',
+        name: _logName,
       );
     }
 
-    print('[RemoteDatasourceImpl.signUp] Sign up completed for ${user.email}');
+    AppLogger.d(
+      '[RemoteDatasourceImpl.signUp] Sign up completed for ${user.email}',
+      name: _logName,
+    );
   }
 }
 
@@ -125,8 +158,13 @@ Map<String, dynamic> _normalizeResponseData(dynamic data) {
       if (decoded is Map<String, dynamic>) {
         return decoded;
       }
-    } catch (error) {
-      print('[RemoteDatasourceImpl] Failed to decode string response: $error');
+    } catch (error, stackTrace) {
+      AppLogger.w(
+        '[RemoteDatasourceImpl] Failed to decode string response',
+        name: _logName,
+        error: error,
+        stackTrace: stackTrace,
+      );
     }
 
     return <String, dynamic>{'token': data};
