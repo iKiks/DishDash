@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:dishdash/core/common/entities/user.dart';
+import 'package:dishdash/core/utils/app_logger.dart';
 import 'package:dishdash/features/login_sign_up/domain/usecases/login_usecase.dart';
 import 'package:dishdash/features/login_sign_up/domain/usecases/sign_up_usecase.dart';
 
@@ -75,7 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LoginSubmitted event,
     Emitter<AuthState> emit,
   ) async {
-    print('[AuthBloc] LoginSubmitted received for ${event.email}');
+    AppLogger.d('[AuthBloc] LoginSubmitted received for ${event.email}');
     emit(
       state.copyWith(loginStatus: RequestStatus.loading, errorMessage: null),
     );
@@ -84,7 +85,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final token = await _loginUseCase(
         LoginParams(email: event.email, password: event.password),
       );
-      print('[AuthBloc] Login succeeded for ${event.email}');
+      AppLogger.d('[AuthBloc] Login succeeded for ${event.email}');
       emit(
         state.copyWith(
           loginStatus: RequestStatus.success,
@@ -92,8 +93,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           errorMessage: null,
         ),
       );
-    } catch (error) {
-      print('[AuthBloc] Login failed for ${event.email}: $error');
+    } catch (error, stackTrace) {
+      AppLogger.e(
+        '[AuthBloc] Login failed for ${event.email}',
+        error: error,
+        stackTrace: stackTrace,
+      );
       emit(
         state.copyWith(
           loginStatus: RequestStatus.failure,
@@ -107,7 +112,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     SignUpSubmitted event,
     Emitter<AuthState> emit,
   ) async {
-    print('[AuthBloc] SignUpSubmitted received for ${event.user.email}');
+    AppLogger.d('[AuthBloc] SignUpSubmitted received for ${event.user.email}');
     emit(
       state.copyWith(signUpStatus: RequestStatus.loading, errorMessage: null),
     );
@@ -116,13 +121,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _signUpUseCase(
         SignUpParams(user: event.user, password: event.password),
       );
-      print('[AuthBloc] Sign up succeeded for ${event.user.email}');
+      AppLogger.d('[AuthBloc] Sign up succeeded for ${event.user.email}');
 
       emit(
         state.copyWith(signUpStatus: RequestStatus.success, errorMessage: null),
       );
-    } catch (error) {
-      print('[AuthBloc] Sign up failed for ${event.user.email}: $error');
+    } catch (error, stackTrace) {
+      AppLogger.e(
+        '[AuthBloc] Sign up failed for ${event.user.email}',
+        error: error,
+        stackTrace: stackTrace,
+      );
       emit(
         state.copyWith(
           signUpStatus: RequestStatus.failure,
@@ -133,12 +142,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _handleStatusCleared(AuthStatusCleared event, Emitter<AuthState> emit) {
-    print('[AuthBloc] AuthStatusCleared received');
+    AppLogger.d('[AuthBloc] AuthStatusCleared received');
     emit(const AuthState());
   }
 
   String _mapErrorMessage(Object error) {
-    print('[AuthBloc] Mapping error: $error');
+    AppLogger.d('[AuthBloc] Mapping error: $error');
     if (error is DioException) {
       final responseData = error.response?.data;
       if (responseData is Map<String, dynamic>) {
