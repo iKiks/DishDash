@@ -3,6 +3,8 @@ import 'package:dishdash/core/utils/app_logger.dart';
 import 'package:dishdash/features/login_sign_up/data/datasources/remote_datasource.dart';
 import 'package:dishdash/features/login_sign_up/domain/repositories/auth_repository.dart';
 
+const _logName = 'DishDash.AuthRepository';
+
 class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl({required RemoteDatasource remoteDatasource})
     : _remoteDatasource = remoteDatasource;
@@ -11,7 +13,10 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<String> login({required String email, required String password}) {
-    AppLogger.d('[AuthRepositoryImpl.login] Forwarding login for $email');
+    AppLogger.d(
+      '[AuthRepositoryImpl.login] Forwarding login for $email',
+      name: _logName,
+    );
     return _remoteDatasource.login(email, password);
   }
 
@@ -19,6 +24,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> signUp({required User user, required String password}) {
     AppLogger.d(
       '[AuthRepositoryImpl.signUp] Forwarding sign up for ${user.email}',
+      name: _logName,
     );
     return _remoteDatasource.signUp(user, password);
   }
