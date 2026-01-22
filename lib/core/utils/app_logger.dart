@@ -42,6 +42,14 @@ class AppLogger {
     defaultValue: true,
   );
 
+  static bool? _enabledOverride;
+
+  static bool get isEnabled => _enabledOverride ?? enabled;
+
+  static void setEnabledOverride(bool? enabledOverride) {
+    _enabledOverride = enabledOverride;
+  }
+
   static AppLogSink _sink = _developerSink;
 
   static void setSink(AppLogSink sink) {
@@ -70,7 +78,7 @@ class AppLogger {
     Object? error,
     StackTrace? stackTrace,
   }) {
-    if (!enabled) return;
+    if (!isEnabled) return;
 
     _sink(
       AppLogRecord(
