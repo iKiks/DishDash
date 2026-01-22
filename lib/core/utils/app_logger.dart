@@ -42,6 +42,27 @@ class AppLogger {
     defaultValue: true,
   );
 
+  static AppLogSink _sink = _developerSink;
+
+  static void setSink(AppLogSink sink) {
+    _sink = sink;
+  }
+
+  static void resetSink() {
+    _sink = _developerSink;
+  }
+
+  static void _developerSink(AppLogRecord record) {
+    developer.log(
+      record.message,
+      name: record.name,
+      error: record.error,
+      stackTrace: record.stackTrace,
+      level: record.level,
+      time: record.time,
+    );
+  }
+
   static void _log(
     int level,
     String message, {
@@ -50,12 +71,15 @@ class AppLogger {
     StackTrace? stackTrace,
   }) {
     if (!enabled) return;
-    developer.log(
-      message,
-      name: name,
-      error: error,
-      stackTrace: stackTrace,
-      level: level,
+
+    _sink(
+      AppLogRecord(
+        message: message,
+        name: name,
+        level: level,
+        error: error,
+        stackTrace: stackTrace,
+      ),
     );
   }
 
