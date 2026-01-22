@@ -39,6 +39,21 @@ class AppLogger {
     );
   }
 
+  static void v(
+    String message, {
+    String name = 'DishDash',
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
+    _log(
+      verboseLevel,
+      message,
+      name: name,
+      error: error,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void d(
     String message, {
     String name = 'DishDash',
