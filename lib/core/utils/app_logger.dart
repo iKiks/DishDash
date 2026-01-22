@@ -54,6 +54,21 @@ class AppLogger {
     );
   }
 
+  static void i(
+    String message, {
+    String name = 'DishDash',
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
+    _log(
+      infoLevel,
+      message,
+      name: name,
+      error: error,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void w(
     String message, {
     String name = 'DishDash',
