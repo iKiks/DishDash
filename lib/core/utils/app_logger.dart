@@ -1,5 +1,25 @@
 import 'dart:developer' as developer;
 
+typedef AppLogSink = void Function(AppLogRecord record);
+
+class AppLogRecord {
+  AppLogRecord({
+    required this.message,
+    required this.name,
+    required this.level,
+    this.error,
+    this.stackTrace,
+    DateTime? time,
+  }) : time = time ?? DateTime.now();
+
+  final String message;
+  final String name;
+  final int level;
+  final Object? error;
+  final StackTrace? stackTrace;
+  final DateTime time;
+}
+
 /// Lightweight app logger for non-UI layers.
 ///
 /// Uses `dart:developer` so it works in pure Dart code without `print()`.
