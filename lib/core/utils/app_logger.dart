@@ -22,9 +22,10 @@ class AppLogger {
     defaultValue: true,
   );
 
-  static void d(
+  static void _log(
+    int level,
     String message, {
-    String name = 'DishDash',
+    required String name,
     Object? error,
     StackTrace? stackTrace,
   }) {
@@ -34,7 +35,22 @@ class AppLogger {
       name: name,
       error: error,
       stackTrace: stackTrace,
-      level: debugLevel,
+      level: level,
+    );
+  }
+
+  static void d(
+    String message, {
+    String name = 'DishDash',
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
+    _log(
+      debugLevel,
+      message,
+      name: name,
+      error: error,
+      stackTrace: stackTrace,
     );
   }
 
@@ -44,13 +60,12 @@ class AppLogger {
     Object? error,
     StackTrace? stackTrace,
   }) {
-    if (!enabled) return;
-    developer.log(
+    _log(
+      warningLevel,
       message,
       name: name,
       error: error,
       stackTrace: stackTrace,
-      level: warningLevel,
     );
   }
 
@@ -60,13 +75,12 @@ class AppLogger {
     Object? error,
     StackTrace? stackTrace,
   }) {
-    if (!enabled) return;
-    developer.log(
+    _log(
+      errorLevel,
       message,
       name: name,
       error: error,
       stackTrace: stackTrace,
-      level: errorLevel,
     );
   }
 }
