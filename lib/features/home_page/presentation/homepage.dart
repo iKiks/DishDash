@@ -47,59 +47,86 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ResponsiveSize.width(20),
-              vertical: ResponsiveSize.height(18),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                HomeHeader(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: ResponsiveSize.height(18)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(20),
+                ),
+                child: HomeHeader(
                   onNotificationTap: () {},
                   onSearchTap: () {},
                   notificationIconAsset: _notificationIcon,
                   searchIconAsset: _searchIcon,
                 ),
-                SizedBox(height: ResponsiveSize.height(16)),
-                CategoryChips(
+              ),
+              SizedBox(height: ResponsiveSize.height(16)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(20),
+                ),
+                child: CategoryChips(
                   categories: _categories,
                   selectedIndex: _selectedCategoryIndex,
                   onSelected: (index) => setState(() {
                     _selectedCategoryIndex = index;
                   }),
                 ),
-                SizedBox(height: ResponsiveSize.height(18)),
-                AppTexts(
+              ),
+              SizedBox(height: ResponsiveSize.height(18)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(20),
+                ),
+                child: AppTexts(
                   'Trending Recipe',
                   fontSize: ResponsiveSize.fontSize(16),
                   color: AppColors.redPink,
                   fontWeightToken: AppFontWeight.semiBold,
                 ),
-                SizedBox(height: ResponsiveSize.height(10)),
-                TrendingCard(
+              ),
+              SizedBox(height: ResponsiveSize.height(10)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(20),
+                ),
+                child: TrendingCard(
                   favoriteIconAsset: favoriteIcon,
                   clockIconAsset: _clockIcon,
                   starIconAsset: _starIcon,
                 ),
-                SizedBox(height: ResponsiveSize.height(18)),
-                YourRecipesSection(
-                  favoriteIconAsset: favoriteIcon,
-                  clockIconAsset: _clockIcon,
-                  starIconAsset: _starIcon,
+              ),
+              SizedBox(height: ResponsiveSize.height(18)),
+              // Full-width section (no horizontal padding) so it can control
+              // its own layout without being constrained by page padding.
+              YourRecipesSection(
+                favoriteIconAsset: favoriteIcon,
+                clockIconAsset: _clockIcon,
+                starIconAsset: _starIcon,
+              ),
+              SizedBox(height: ResponsiveSize.height(16)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(20),
                 ),
-                SizedBox(height: ResponsiveSize.height(16)),
-                AppTexts(
+                child: AppTexts(
                   'Top Chef',
                   fontSize: ResponsiveSize.fontSize(16),
                   color: AppColors.redPink,
                   fontWeightToken: AppFontWeight.semiBold,
                 ),
-                SizedBox(height: ResponsiveSize.height(10)),
-                const TopChefRow(),
-                SizedBox(height: ResponsiveSize.height(28)),
-              ],
-            ),
+              ),
+              SizedBox(height: ResponsiveSize.height(10)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(20),
+                ),
+                child: const TopChefRow(),
+              ),
+              SizedBox(height: ResponsiveSize.height(28)),
+            ],
           ),
         ),
       ),
