@@ -42,20 +42,11 @@ class TrendingCard extends StatelessWidget {
         Positioned(
           top: ResponsiveSize.height(10),
           right: ResponsiveSize.width(10),
-          child: Container(
-            width: ResponsiveSize.width(34),
-            height: ResponsiveSize.width(34),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              shape: BoxShape.circle,
-            ),
-            alignment: Alignment.center,
-            child: Image.asset(
-              favoriteIconAsset,
-              width: ResponsiveSize.width(18),
-              height: ResponsiveSize.width(18),
-              fit: BoxFit.contain,
-            ),
+          child: Image.asset(
+            favoriteIconAsset,
+            width: ResponsiveSize.width(28),
+            height: ResponsiveSize.width(28),
+            fit: BoxFit.contain,
           ),
         ),
         Positioned(

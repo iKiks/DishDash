@@ -90,20 +90,11 @@ class RecipeMiniCard extends StatelessWidget {
             Positioned(
               top: ResponsiveSize.height(10),
               right: ResponsiveSize.width(10),
-              child: Container(
-                width: ResponsiveSize.width(30),
-                height: ResponsiveSize.width(30),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.center,
-                child: Image.asset(
-                  favoriteIconAsset,
-                  width: ResponsiveSize.width(16),
-                  height: ResponsiveSize.width(16),
-                  fit: BoxFit.contain,
-                ),
+              child: Image.asset(
+                favoriteIconAsset,
+                width: ResponsiveSize.width(28),
+                height: ResponsiveSize.width(28),
+                fit: BoxFit.contain,
               ),
             ),
           ],

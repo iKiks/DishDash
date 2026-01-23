@@ -83,8 +83,8 @@ class RoundIconButton extends StatelessWidget {
         alignment: Alignment.center,
         child: Image.asset(
           assetPath,
-          width: ResponsiveSize.width(18),
-          height: ResponsiveSize.width(18),
+          width: ResponsiveSize.width(28),
+          height: ResponsiveSize.width(28),
           fit: BoxFit.contain,
         ),
       ),

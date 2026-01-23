@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class TopChefRow extends StatelessWidget {
   final double horizontalPadding;
 
-  const TopChefRow({
-    super.key,
-    this.horizontalPadding = 20,
-  });
+  const TopChefRow({super.key, this.horizontalPadding = 20});
 
   @override
   Widget build(BuildContext context) {

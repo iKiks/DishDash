@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                   starIconAsset: _starIcon,
                 ),
               ),
-              SizedBox(height: ResponsiveSize.height(18)),
+              SizedBox(height: ResponsiveSize.height(40)),
               // Full-width section (no horizontal padding) so it can control
               // its own layout without being constrained by page padding.
               YourRecipesSection(
