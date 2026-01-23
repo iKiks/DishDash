@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
               // Full-width section (no horizontal padding) so it can control
               // its own layout without being constrained by page padding.
               YourRecipesSection(
-                favoriteIconAsset: favoriteIcon,
+                favoriteIconAsset: _favoriteDark,
                 clockIconAsset: _clockIcon,
                 starIconAsset: _starIcon,
               ),
