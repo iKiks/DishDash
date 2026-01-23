@@ -27,8 +27,14 @@ class TrendingCard extends StatelessWidget {
           child: AspectRatio(
             aspectRatio: 335 / 170,
             child: Image.network(
-              'https://images.unsplash.com/photo-1548365328-9f547f8f6a0f?auto=format&fit=crop&w=1200&q=80',
+              'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80',
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'lib/core/assets/preferences/pizza.png',
+                  fit: BoxFit.cover,
+                );
+              },
             ),
           ),
         ),
