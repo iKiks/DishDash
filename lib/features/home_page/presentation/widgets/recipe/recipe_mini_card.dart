@@ -39,7 +39,16 @@ class RecipeMiniCard extends StatelessWidget {
               children: [
                 AspectRatio(
                   aspectRatio: 1.25,
-                  child: Image.network(imageUrl, fit: BoxFit.cover),
+                  child: Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'lib/core/assets/preferences/dessert.png',
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(

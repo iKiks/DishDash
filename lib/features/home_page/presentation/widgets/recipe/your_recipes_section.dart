@@ -59,7 +59,7 @@ class YourRecipesSection extends StatelessWidget {
                 child: RecipeMiniCard(
                   title: 'Tiramisu',
                   imageUrl:
-                      'https://images.unsplash.com/photo-1599785209707-28dc0b42c415?auto=format&fit=crop&w=1200&q=80',
+                      'https://images.unsplash.com/photo-1542326237-94b1c5a538d4?auto=format&fit=crop&w=1200&q=80',
                   favoriteIconAsset: favoriteIconAsset,
                   clockIconAsset: clockIconAsset,
                   starIconAsset: starIconAsset,
