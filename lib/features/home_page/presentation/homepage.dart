@@ -119,12 +119,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               SizedBox(height: ResponsiveSize.height(10)),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ResponsiveSize.width(20),
-                ),
-                child: const TopChefRow(),
-              ),
+              const TopChefRow(),
               SizedBox(height: ResponsiveSize.height(28)),
             ],
           ),
