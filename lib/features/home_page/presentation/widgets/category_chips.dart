@@ -43,8 +43,9 @@ class CategoryChips extends StatelessWidget {
                 categories[index],
                 fontSize: ResponsiveSize.fontSize(12),
                 color: isSelected ? Colors.white : AppColors.redPink,
-                fontWeightToken:
-                    isSelected ? AppFontWeight.semiBold : AppFontWeight.regular,
+                fontWeightToken: isSelected
+                    ? AppFontWeight.semiBold
+                    : AppFontWeight.regular,
               ),
             ),
           );

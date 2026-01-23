@@ -49,10 +49,7 @@ class HomeHeader extends StatelessWidget {
               assetPath: notificationIconAsset,
             ),
             SizedBox(width: ResponsiveSize.width(10)),
-            RoundIconButton(
-              onTap: onSearchTap,
-              assetPath: searchIconAsset,
-            ),
+            RoundIconButton(onTap: onSearchTap, assetPath: searchIconAsset),
           ],
         ),
       ],
