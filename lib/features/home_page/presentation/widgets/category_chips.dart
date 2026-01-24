@@ -26,26 +26,33 @@ class CategoryChips extends StatelessWidget {
         separatorBuilder: (_, __) => SizedBox(width: ResponsiveSize.width(18)),
         itemBuilder: (context, index) {
           final isSelected = index == selectedIndex;
-          return GestureDetector(
-            onTap: () => onSelected(index),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              padding: EdgeInsets.symmetric(
-                horizontal: ResponsiveSize.width(14),
-                vertical: ResponsiveSize.height(8),
-              ),
-              decoration: BoxDecoration(
-                color: isSelected ? AppColors.redPink : AppColors.transparent,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              alignment: Alignment.center,
-              child: AppTexts(
-                categories[index],
-                fontSize: ResponsiveSize.fontSize(12),
-                color: isSelected ? Colors.white : AppColors.redPink,
-                fontWeightToken: isSelected
-                    ? AppFontWeight.semiBold
-                    : AppFontWeight.regular,
+          final label = categories[index];
+
+          return Semantics(
+            button: true,
+            selected: isSelected,
+            label: label,
+            child: GestureDetector(
+              onTap: () => onSelected(index),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 180),
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(14),
+                  vertical: ResponsiveSize.height(8),
+                ),
+                decoration: BoxDecoration(
+                  color: isSelected ? AppColors.redPink : AppColors.transparent,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                alignment: Alignment.center,
+                child: AppTexts(
+                  label,
+                  fontSize: ResponsiveSize.fontSize(12),
+                  color: isSelected ? Colors.white : AppColors.redPink,
+                  fontWeightToken: isSelected
+                      ? AppFontWeight.semiBold
+                      : AppFontWeight.regular,
+                ),
               ),
             ),
           );
