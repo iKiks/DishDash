@@ -59,8 +59,8 @@ class _HomePageState extends State<HomePage> {
                   horizontal: pageHorizontalPadding,
                 ),
                 child: HomeHeader(
-                  onNotificationTap: () {},
-                  onSearchTap: () {},
+                  onNotificationTap: _handleNotificationTap,
+                  onSearchTap: _handleSearchTap,
                   notificationIconAsset: _notificationIcon,
                   searchIconAsset: _searchIcon,
                 ),
@@ -129,4 +129,8 @@ class _HomePageState extends State<HomePage> {
       fontWeightToken: AppFontWeight.semiBold,
     );
   }
+
+  void _handleNotificationTap() {}
+
+  void _handleSearchTap() {}
 }
