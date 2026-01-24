@@ -41,9 +41,9 @@ class _HomePageState extends State<HomePage> {
     final theme = Theme.of(context);
     final pageHorizontalPadding = ResponsiveSize.width(20);
 
-    final favoriteIcon = theme.brightness == Brightness.dark
-        ? _favoriteDark
-        : _favoriteLight;
+    final isDark = theme.brightness == Brightness.dark;
+
+    final favoriteIcon = isDark ? _favoriteDark : _favoriteLight;
 
     return Scaffold(
       backgroundColor: AppColors.white,
