@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
