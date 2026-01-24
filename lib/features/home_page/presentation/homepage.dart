@@ -83,12 +83,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(
                   horizontal: pageHorizontalPadding,
                 ),
-                child: AppTexts(
-                  'Trending Recipe',
-                  fontSize: ResponsiveSize.fontSize(16),
-                  color: AppColors.redPink,
-                  fontWeightToken: AppFontWeight.semiBold,
-                ),
+                child: _buildSectionTitle('Trending Recipe'),
               ),
               SizedBox(height: ResponsiveSize.height(10)),
               Padding(
@@ -114,12 +109,7 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(
                   horizontal: pageHorizontalPadding,
                 ),
-                child: AppTexts(
-                  'Top Chef',
-                  fontSize: ResponsiveSize.fontSize(16),
-                  color: AppColors.redPink,
-                  fontWeightToken: AppFontWeight.semiBold,
-                ),
+                child: _buildSectionTitle('Top Chef'),
               ),
               SizedBox(height: ResponsiveSize.height(10)),
               const TopChefRow(),
@@ -128,6 +118,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return AppTexts(
+      title,
+      fontSize: ResponsiveSize.fontSize(16),
+      color: AppColors.redPink,
+      fontWeightToken: AppFontWeight.semiBold,
     );
   }
 }
