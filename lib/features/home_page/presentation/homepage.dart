@@ -38,7 +38,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     ResponsiveSize.init(context);
 
-    final favoriteIcon = Theme.of(context).brightness == Brightness.dark
+    final theme = Theme.of(context);
+
+    final favoriteIcon = theme.brightness == Brightness.dark
         ? _favoriteDark
         : _favoriteLight;
 
