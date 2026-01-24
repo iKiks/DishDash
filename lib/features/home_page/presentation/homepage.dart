@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
       'lib/core/assets/icons/favorite_button_light.png';
   static const _favoriteDark = 'lib/core/assets/icons/favorite_button_dark.png';
 
-  final List<String> _categories = const [
+  static const List<String> _categories = [
     'Breakfast',
     'Lunch',
     'Dinner',
