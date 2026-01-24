@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     ResponsiveSize.init(context);
 
     final theme = Theme.of(context);
+    final pageHorizontalPadding = ResponsiveSize.width(20);
 
     final favoriteIcon = theme.brightness == Brightness.dark
         ? _favoriteDark
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: ResponsiveSize.height(18)),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: ResponsiveSize.width(20),
+                  horizontal: pageHorizontalPadding,
                 ),
                 child: HomeHeader(
                   onNotificationTap: () {},
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: ResponsiveSize.height(16)),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: ResponsiveSize.width(20),
+                  horizontal: pageHorizontalPadding,
                 ),
                 child: CategoryChips(
                   categories: _categories,
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: ResponsiveSize.height(18)),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: ResponsiveSize.width(20),
+                  horizontal: pageHorizontalPadding,
                 ),
                 child: AppTexts(
                   'Trending Recipe',
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: ResponsiveSize.height(10)),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: ResponsiveSize.width(20),
+                  horizontal: pageHorizontalPadding,
                 ),
                 child: TrendingCard(
                   favoriteIconAsset: favoriteIcon,
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: ResponsiveSize.height(16)),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: ResponsiveSize.width(20),
+                  horizontal: pageHorizontalPadding,
                 ),
                 child: AppTexts(
                   'Top Chef',
