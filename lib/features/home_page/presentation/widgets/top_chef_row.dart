@@ -8,15 +8,15 @@ class TopChefRow extends StatelessWidget {
 
   const TopChefRow({super.key, this.horizontalPadding = 20});
 
+  static const _chefs = [
+    ('Joseph', 'https://i.pravatar.cc/120?img=12'),
+    ('Andrew', 'https://i.pravatar.cc/120?img=15'),
+    ('Emily', 'https://i.pravatar.cc/120?img=32'),
+    ('Jessica', 'https://i.pravatar.cc/120?img=47'),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final chefs = const [
-      ('Joseph', 'https://i.pravatar.cc/120?img=12'),
-      ('Andrew', 'https://i.pravatar.cc/120?img=15'),
-      ('Emily', 'https://i.pravatar.cc/120?img=32'),
-      ('Jessica', 'https://i.pravatar.cc/120?img=47'),
-    ];
-
     final avatarSize = ResponsiveSize.width(54);
 
     return Padding(
@@ -28,7 +28,7 @@ class TopChefRow extends StatelessWidget {
         width: double.infinity,
         child: Row(
           children: [
-            for (final (name, url) in chefs)
+            for (final (name, url) in _chefs)
               Expanded(
                 child: Align(
                   alignment: Alignment.topCenter,
