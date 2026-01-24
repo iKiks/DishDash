@@ -47,9 +47,14 @@ class HomeHeader extends StatelessWidget {
             RoundIconButton(
               onTap: onNotificationTap,
               assetPath: notificationIconAsset,
+              semanticsLabel: 'Notifications',
             ),
             SizedBox(width: ResponsiveSize.width(10)),
-            RoundIconButton(onTap: onSearchTap, assetPath: searchIconAsset),
+            RoundIconButton(
+              onTap: onSearchTap,
+              assetPath: searchIconAsset,
+              semanticsLabel: 'Search',
+            ),
           ],
         ),
       ],
@@ -60,32 +65,38 @@ class HomeHeader extends StatelessWidget {
 class RoundIconButton extends StatelessWidget {
   final VoidCallback onTap;
   final String assetPath;
+  final String? semanticsLabel;
 
   const RoundIconButton({
     super.key,
     required this.onTap,
     required this.assetPath,
+    this.semanticsLabel,
   });
 
   @override
   Widget build(BuildContext context) {
     final size = ResponsiveSize.width(38);
-    return InkResponse(
-      onTap: onTap,
-      radius: size,
-      child: Container(
-        width: size,
-        height: size,
-        decoration: const BoxDecoration(
-          color: AppColors.pink,
-          shape: BoxShape.circle,
-        ),
-        alignment: Alignment.center,
-        child: Image.asset(
-          assetPath,
-          width: ResponsiveSize.width(28),
-          height: ResponsiveSize.width(28),
-          fit: BoxFit.contain,
+    return Semantics(
+      button: true,
+      label: semanticsLabel,
+      child: InkResponse(
+        onTap: onTap,
+        radius: size,
+        child: Container(
+          width: size,
+          height: size,
+          decoration: const BoxDecoration(
+            color: AppColors.pink,
+            shape: BoxShape.circle,
+          ),
+          alignment: Alignment.center,
+          child: Image.asset(
+            assetPath,
+            width: ResponsiveSize.width(28),
+            height: ResponsiveSize.width(28),
+            fit: BoxFit.contain,
+          ),
         ),
       ),
     );
