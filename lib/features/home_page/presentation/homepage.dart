@@ -78,9 +78,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: ResponsiveSize.height(18)),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: pageHorizontalPadding,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: pageHorizontalPadding),
                 child: _buildSectionTitle('Trending Recipe'),
               ),
               SizedBox(height: ResponsiveSize.height(10)),
