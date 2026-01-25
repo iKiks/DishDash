@@ -81,9 +81,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: ResponsiveSize.height(10)),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: pageHorizontalPadding,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: pageHorizontalPadding),
                 child: TrendingCard(
                   favoriteIconAsset: favoriteIcon,
                   clockIconAsset: _clockIcon,
