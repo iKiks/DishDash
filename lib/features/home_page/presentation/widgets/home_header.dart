@@ -44,17 +44,9 @@ class HomeHeader extends StatelessWidget {
         ),
         Row(
           children: [
-            RoundIconButton(
-              onTap: onNotificationTap,
-              assetPath: notificationIconAsset,
-              semanticsLabel: 'Notifications',
-            ),
+            RoundIconButton(onTap: onNotificationTap, assetPath: notificationIconAsset, semanticsLabel: 'Notifications'),
             SizedBox(width: ResponsiveSize.width(10)),
-            RoundIconButton(
-              onTap: onSearchTap,
-              assetPath: searchIconAsset,
-              semanticsLabel: 'Search',
-            ),
+            RoundIconButton(onTap: onSearchTap, assetPath: searchIconAsset, semanticsLabel: 'Search'),
           ],
         ),
       ],
