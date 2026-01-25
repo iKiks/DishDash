@@ -55,7 +55,9 @@ class _HomePageState extends State<HomePage> {
             children: [
               SizedBox(height: ResponsiveSize.height(18)),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: pageHorizontalPadding),
+                padding: EdgeInsets.symmetric(
+                  horizontal: pageHorizontalPadding,
+                ),
                 child: HomeHeader(
                   onNotificationTap: _handleNotificationTap,
                   onSearchTap: _handleSearchTap,
@@ -65,7 +67,9 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: ResponsiveSize.height(16)),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: pageHorizontalPadding),
+                padding: EdgeInsets.symmetric(
+                  horizontal: pageHorizontalPadding,
+                ),
                 child: CategoryChips(
                   categories: _categories,
                   selectedIndex: _selectedCategoryIndex,
@@ -76,12 +80,16 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: ResponsiveSize.height(18)),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: pageHorizontalPadding),
+                padding: EdgeInsets.symmetric(
+                  horizontal: pageHorizontalPadding,
+                ),
                 child: _buildSectionTitle('Trending Recipe'),
               ),
               SizedBox(height: ResponsiveSize.height(10)),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: pageHorizontalPadding),
+                padding: EdgeInsets.symmetric(
+                  horizontal: pageHorizontalPadding,
+                ),
                 child: TrendingCard(
                   favoriteIconAsset: favoriteIcon,
                   clockIconAsset: _clockIcon,
@@ -98,7 +106,9 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: ResponsiveSize.height(16)),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: pageHorizontalPadding),
+                padding: EdgeInsets.symmetric(
+                  horizontal: pageHorizontalPadding,
+                ),
                 child: _buildSectionTitle('Top Chef'),
               ),
               SizedBox(height: ResponsiveSize.height(10)),
