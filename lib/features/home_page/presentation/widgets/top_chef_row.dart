@@ -20,9 +20,7 @@ class TopChefRow extends StatelessWidget {
     final avatarSize = ResponsiveSize.width(54);
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: ResponsiveSize.width(horizontalPadding),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: ResponsiveSize.width(horizontalPadding)),
       child: SizedBox(
         height: ResponsiveSize.height(86),
         width: double.infinity,
