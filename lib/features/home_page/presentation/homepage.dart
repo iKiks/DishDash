@@ -4,6 +4,7 @@ import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/category_chips.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/home_header.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/recipe_cards.dart';
+import 'package:dishdash/features/home_page/presentation/widgets/search_popup.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/top_chef_row.dart';
 import 'package:flutter/material.dart';
 
@@ -132,5 +133,12 @@ class _HomePageState extends State<HomePage> {
 
   void _handleNotificationTap() {}
 
-  void _handleSearchTap() {}
+  void _handleSearchTap() {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: Colors.black.withAlpha(85),
+      builder: (_) => const SearchPopup(),
+    );
+  }
 }
