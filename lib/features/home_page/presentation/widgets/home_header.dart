@@ -76,16 +76,17 @@ class RoundIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = ResponsiveSize.width(38);
+    final buttonSize = ResponsiveSize.width(38);
+    final iconSize = ResponsiveSize.width(28);
     return Semantics(
       button: true,
       label: semanticsLabel,
       child: InkResponse(
         onTap: onTap,
-        radius: size,
+        radius: buttonSize,
         child: Container(
-          width: size,
-          height: size,
+          width: buttonSize,
+          height: buttonSize,
           decoration: const BoxDecoration(
             color: AppColors.pink,
             shape: BoxShape.circle,
@@ -93,8 +94,8 @@ class RoundIconButton extends StatelessWidget {
           alignment: Alignment.center,
           child: Image.asset(
             assetPath,
-            width: ResponsiveSize.width(28),
-            height: ResponsiveSize.width(28),
+            width: iconSize,
+            height: iconSize,
             fit: BoxFit.contain,
           ),
         ),
