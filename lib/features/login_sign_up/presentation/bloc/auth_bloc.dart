@@ -76,16 +76,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     LoginSubmitted event,
     Emitter<AuthState> emit,
   ) async {
-    AppLogger.d('[AuthBloc] LoginSubmitted received for ${event.email}');
+    final email = event.email;
+    final password = event.password;
+
+    AppLogger.d('[AuthBloc] LoginSubmitted received for $email');
     emit(
       state.copyWith(loginStatus: RequestStatus.loading, errorMessage: null),
     );
 
     try {
       final token = await _loginUseCase(
-        LoginParams(email: event.email, password: event.password),
+        LoginParams(email: email, password: password),
       );
-      AppLogger.d('[AuthBloc] Login succeeded for ${event.email}');
+      AppLogger.d('[AuthBloc] Login succeeded for $email');
       emit(
         state.copyWith(
           loginStatus: RequestStatus.success,
@@ -95,7 +98,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
     } catch (error, stackTrace) {
       AppLogger.e(
-        '[AuthBloc] Login failed for ${event.email}',
+        '[AuthBloc] Login failed for $email',
         error: error,
         stackTrace: stackTrace,
       );
@@ -112,23 +115,25 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     SignUpSubmitted event,
     Emitter<AuthState> emit,
   ) async {
-    AppLogger.d('[AuthBloc] SignUpSubmitted received for ${event.user.email}');
+    final user = event.user;
+    final userEmail = user.email;
+    final password = event.password;
+
+    AppLogger.d('[AuthBloc] SignUpSubmitted received for $userEmail');
     emit(
       state.copyWith(signUpStatus: RequestStatus.loading, errorMessage: null),
     );
 
     try {
-      await _signUpUseCase(
-        SignUpParams(user: event.user, password: event.password),
-      );
-      AppLogger.d('[AuthBloc] Sign up succeeded for ${event.user.email}');
+      await _signUpUseCase(SignUpParams(user: user, password: password));
+      AppLogger.d('[AuthBloc] Sign up succeeded for $userEmail');
 
       emit(
         state.copyWith(signUpStatus: RequestStatus.success, errorMessage: null),
       );
     } catch (error, stackTrace) {
       AppLogger.e(
-        '[AuthBloc] Sign up failed for ${event.user.email}',
+        '[AuthBloc] Sign up failed for $userEmail',
         error: error,
         stackTrace: stackTrace,
       );
