@@ -17,13 +17,18 @@ class CategoryChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const animationDuration = Duration(milliseconds: 180);
+    final chipHorizontalPadding = ResponsiveSize.width(14);
+    final chipVerticalPadding = ResponsiveSize.height(8);
+    final separatorWidth = ResponsiveSize.width(18);
+
     return SizedBox(
       height: ResponsiveSize.height(34),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         physics: const BouncingScrollPhysics(),
         itemCount: categories.length,
-        separatorBuilder: (_, __) => SizedBox(width: ResponsiveSize.width(18)),
+        separatorBuilder: (_, __) => SizedBox(width: separatorWidth),
         itemBuilder: (context, index) {
           final isSelected = index == selectedIndex;
           final label = categories[index];
@@ -35,10 +40,10 @@ class CategoryChips extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onSelected(index),
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 180),
+                duration: animationDuration,
                 padding: EdgeInsets.symmetric(
-                  horizontal: ResponsiveSize.width(14),
-                  vertical: ResponsiveSize.height(8),
+                  horizontal: chipHorizontalPadding,
+                  vertical: chipVerticalPadding,
                 ),
                 decoration: BoxDecoration(
                   color: isSelected ? AppColors.redPink : AppColors.transparent,
