@@ -39,17 +39,20 @@ class LevelSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final verticalSpacing = ResponsiveSize.height(16);
+    final levels = _levels;
+    final lastIndex = levels.length - 1;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        for (var i = 0; i < _levels.length; i++) ...[
+        for (var i = 0; i < levels.length; i++) ...[
           LevelCard(
-            title: _levels[i].title,
-            description: _levels[i].description,
+            title: levels[i].title,
+            description: levels[i].description,
             isSelected: selectedLevel == i,
             onTap: () => onLevelSelected(i),
           ),
-          if (i != _levels.length - 1) SizedBox(height: verticalSpacing),
+          if (i != lastIndex) SizedBox(height: verticalSpacing),
         ],
       ],
     );
