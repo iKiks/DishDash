@@ -17,7 +17,8 @@ class SignUpUseCase extends UseCase<void, SignUpParams> {
 
   @override
   Future<void> call(SignUpParams params) {
-    AppLogger.d('[SignUpUseCase] Executing for ${params.user.email}');
-    return _repository.signUp(user: params.user, password: params.password);
+    final user = params.user;
+    AppLogger.d('[SignUpUseCase] Executing for ${user.email}');
+    return _repository.signUp(user: user, password: params.password);
   }
 }
