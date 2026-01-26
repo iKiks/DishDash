@@ -16,7 +16,8 @@ class LoginUseCase extends UseCase<String, LoginParams> {
 
   @override
   Future<String> call(LoginParams params) {
-    AppLogger.d('[LoginUseCase] Executing with email ${params.email}');
-    return _repository.login(email: params.email, password: params.password);
+    final email = params.email;
+    AppLogger.d('[LoginUseCase] Executing with email $email');
+    return _repository.login(email: email, password: params.password);
   }
 }
