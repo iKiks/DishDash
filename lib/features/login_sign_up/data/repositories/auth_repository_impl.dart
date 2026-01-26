@@ -13,8 +13,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<String> login({required String email, required String password}) {
+    final userEmail = email;
     AppLogger.d(
-      '[AuthRepositoryImpl.login] Forwarding login for $email',
+      '[AuthRepositoryImpl.login] Forwarding login for $userEmail',
       name: _logName,
     );
     return _remoteDatasource.login(email, password);
@@ -22,8 +23,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> signUp({required User user, required String password}) {
+    final userEmail = user.email;
     AppLogger.d(
-      '[AuthRepositoryImpl.signUp] Forwarding sign up for ${user.email}',
+      '[AuthRepositoryImpl.signUp] Forwarding sign up for $userEmail',
       name: _logName,
     );
     return _remoteDatasource.signUp(user, password);
