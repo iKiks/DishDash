@@ -10,26 +10,28 @@ class UserModel extends User {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    final dynamic rawDob = json['dateOfBirth'] ?? json['date_of_birth'];
+    final rawDob = json['dateOfBirth'] ?? json['date_of_birth'];
+    final phone = (json['phoneNumber'] ?? json['phone_number'])?.toString();
 
     return UserModel(
       id: json['id']?.toString() ?? '',
       name: json['name']?.toString() ?? '',
       email: json['email']?.toString() ?? '',
-      phoneNumber:
-          json['phoneNumber']?.toString() ?? json['phone_number']?.toString(),
+      phoneNumber: phone,
       dateOfBirth: _parseDateOfBirth(rawDob),
     );
   }
 
   Map<String, dynamic> toJson() {
+    final phone = phoneNumber;
+    final dob = dateOfBirth;
+
     return {
       'id': id,
       'name': name,
       'email': email,
-      if (phoneNumber != null && phoneNumber!.isNotEmpty)
-        'phoneNumber': phoneNumber,
-      if (dateOfBirth != null) 'dateOfBirth': dateOfBirth!.toIso8601String(),
+      if (phone != null && phone.isNotEmpty) 'phoneNumber': phone,
+      if (dob != null) 'dateOfBirth': dob.toIso8601String(),
     };
   }
 
