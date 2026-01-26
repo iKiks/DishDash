@@ -27,27 +27,25 @@ class RemoteDatasourceImpl implements RemoteDatasource {
       name: _logName,
     );
 
-    final response = await () async {
-      try {
-        final result = await _apiClient.post<dynamic>(
-          '/login',
-          data: {'email': email, 'password': password},
-        );
-        AppLogger.d(
-          '[RemoteDatasourceImpl.login] Response received for $email',
-          name: _logName,
-        );
-        return result;
-      } on Object catch (error, stackTrace) {
-        AppLogger.e(
-          '[RemoteDatasourceImpl.login] Request failed for $email',
-          name: _logName,
-          error: error,
-          stackTrace: stackTrace,
-        );
-        rethrow;
-      }
-    }();
+    late final response;
+    try {
+      response = await _apiClient.post<dynamic>(
+        '/login',
+        data: {'email': email, 'password': password},
+      );
+      AppLogger.d(
+        '[RemoteDatasourceImpl.login] Response received for $email',
+        name: _logName,
+      );
+    } on Object catch (error, stackTrace) {
+      AppLogger.e(
+        '[RemoteDatasourceImpl.login] Request failed for $email',
+        name: _logName,
+        error: error,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
 
     final responseData = _normalizeResponseData(response.data);
 
@@ -88,24 +86,22 @@ class RemoteDatasourceImpl implements RemoteDatasource {
         'dateOfBirth': userModel.dateOfBirth!.toIso8601String(),
     };
 
-    final response = await () async {
-      try {
-        final result = await _apiClient.post<dynamic>('/register', data: payload);
-        AppLogger.d(
-          '[RemoteDatasourceImpl.signUp] Response received for ${user.email}',
-          name: _logName,
-        );
-        return result;
-      } on Object catch (error, stackTrace) {
-        AppLogger.e(
-          '[RemoteDatasourceImpl.signUp] Request failed for ${user.email}',
-          name: _logName,
-          error: error,
-          stackTrace: stackTrace,
-        );
-        rethrow;
-      }
-    }();
+    late final response;
+    try {
+      response = await _apiClient.post<dynamic>('/register', data: payload);
+      AppLogger.d(
+        '[RemoteDatasourceImpl.signUp] Response received for ${user.email}',
+        name: _logName,
+      );
+    } on Object catch (error, stackTrace) {
+      AppLogger.e(
+        '[RemoteDatasourceImpl.signUp] Request failed for ${user.email}',
+        name: _logName,
+        error: error,
+        stackTrace: stackTrace,
+      );
+      rethrow;
+    }
 
     final responseData = _normalizeResponseData(response.data);
     final statusCode = response.statusCode ?? 0;
@@ -133,7 +129,10 @@ class RemoteDatasourceImpl implements RemoteDatasource {
         responseData['accessToken']?.toString() ??
         responseData['token']?.toString();
     if (accessToken != null && accessToken.isNotEmpty) {
-      await _secureStorage.write(key: _accessTokenStorageKey, value: accessToken);
+      await _secureStorage.write(
+        key: _accessTokenStorageKey,
+        value: accessToken,
+      );
       AppLogger.d(
         '[RemoteDatasourceImpl.signUp] Stored access token for ${user.email}',
         name: _logName,
