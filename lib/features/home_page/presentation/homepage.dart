@@ -6,6 +6,7 @@ import 'package:dishdash/features/home_page/presentation/widgets/home_header.dar
 import 'package:dishdash/features/home_page/presentation/widgets/recipe_cards.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/search_popup.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/top_chef_row.dart';
+import 'package:dishdash/features/notifications/presentation/notifications_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -131,7 +132,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _handleNotificationTap() {}
+  void _handleNotificationTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => const NotificationsPage(),
+      ),
+    );
+  }
 
   void _handleSearchTap() {
     showDialog<void>(

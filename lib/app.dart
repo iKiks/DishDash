@@ -1,4 +1,4 @@
-import 'package:dishdash/features/home_page/presentation/homepage.dart';
+import 'package:dishdash/features/bottom_navigation/presentation/bottom_nav_shell.dart';
 import 'package:dishdash/features/login_sign_up/presentation/bloc/auth_bloc.dart';
 import 'package:dishdash/features/login_sign_up/presentation/bloc/auth_bloc_factory.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class DishDashApp extends StatelessWidget {
       child: MaterialApp(
         title: 'DishDash',
         theme: _buildTheme(),
-        home: const HomePage(),
+        home: const BottomNavShell(),
         debugShowCheckedModeBanner: false,
       ),
     );
