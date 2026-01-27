@@ -4,6 +4,7 @@ import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/search_popup.dart';
 import 'package:dishdash/features/notifications/presentation/notifications_page.dart';
 import 'package:dishdash/features/trending_recipes/domain/entities/trending_recipe.dart';
+import 'package:dishdash/features/trending_recipes/presentation/trending_recipe_details_page.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/most_viewed_card.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/recipe_row_card.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/trending_recipes_header.dart';
@@ -121,6 +122,15 @@ class TrendingRecipesPage extends StatelessWidget {
                           recipe: recipe,
                           clockIconAsset: _clockIcon,
                           starIconAsset: _starIcon,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => TrendingRecipeDetailsPage(
+                                  recipeTitle: recipe.title,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     )
