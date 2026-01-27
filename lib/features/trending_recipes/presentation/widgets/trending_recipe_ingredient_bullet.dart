@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 class TrendingRecipeIngredientBullet extends StatelessWidget {
   final String text;
 
-  const TrendingRecipeIngredientBullet({
-    super.key,
-    required this.text,
-  });
+  const TrendingRecipeIngredientBullet({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

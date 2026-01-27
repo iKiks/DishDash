@@ -7,10 +7,7 @@ import 'package:flutter/material.dart';
 class TrendingRecipeChefRow extends StatelessWidget {
   final TrendingRecipeDetails details;
 
-  const TrendingRecipeChefRow({
-    super.key,
-    required this.details,
-  });
+  const TrendingRecipeChefRow({super.key, required this.details});
 
   @override
   Widget build(BuildContext context) {

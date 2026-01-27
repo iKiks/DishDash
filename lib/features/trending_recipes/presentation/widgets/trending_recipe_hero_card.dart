@@ -8,11 +8,13 @@ import 'package:flutter/material.dart';
 class TrendingRecipeHeroCard extends StatelessWidget {
   final TrendingRecipeDetails details;
   final String starIconAsset;
+  final VoidCallback? onCommentsTap;
 
   const TrendingRecipeHeroCard({
     super.key,
     required this.details,
     required this.starIconAsset,
+    this.onCommentsTap,
   });
 
   @override
@@ -21,10 +23,7 @@ class TrendingRecipeHeroCard extends StatelessWidget {
     final imageRadius = BorderRadius.circular(ResponsiveSize.width(18));
 
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.redPink,
-        borderRadius: radius,
-      ),
+      decoration: BoxDecoration(color: AppColors.redPink, borderRadius: radius),
       padding: EdgeInsets.all(ResponsiveSize.width(14)),
       child: Column(
         children: [
@@ -78,13 +77,23 @@ class TrendingRecipeHeroCard extends StatelessWidget {
                 text: '${details.rating}',
               ),
               SizedBox(width: ResponsiveSize.width(12)),
-              TrendingRecipeMetaPill(
-                iconWidget: Icon(
-                  Icons.comment,
-                  color: Colors.white,
-                  size: ResponsiveSize.width(14),
+              InkWell(
+                onTap: onCommentsTap,
+                borderRadius: BorderRadius.circular(999),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ResponsiveSize.width(4),
+                    vertical: ResponsiveSize.height(2),
+                  ),
+                  child: TrendingRecipeMetaPill(
+                    iconWidget: Icon(
+                      Icons.comment,
+                      color: Colors.white,
+                      size: ResponsiveSize.width(14),
+                    ),
+                    text: '${details.likes}',
+                  ),
                 ),
-                text: '${details.likes}',
               ),
             ],
           ),

@@ -8,10 +8,7 @@ import 'package:flutter/material.dart';
 class TrendingRecipeIngredientsSection extends StatelessWidget {
   final TrendingRecipeDetails details;
 
-  const TrendingRecipeIngredientsSection({
-    super.key,
-    required this.details,
-  });
+  const TrendingRecipeIngredientsSection({super.key, required this.details});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +22,9 @@ class TrendingRecipeIngredientsSection extends StatelessWidget {
           fontWeightToken: AppFontWeight.semiBold,
         ),
         SizedBox(height: ResponsiveSize.height(12)),
-        ...details.ingredients
-            .map((line) => TrendingRecipeIngredientBullet(text: line)),
+        ...details.ingredients.map(
+          (line) => TrendingRecipeIngredientBullet(text: line),
+        ),
       ],
     );
   }

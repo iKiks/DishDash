@@ -7,6 +7,7 @@ import 'package:dishdash/features/trending_recipes/presentation/widgets/trending
 import 'package:dishdash/features/trending_recipes/presentation/widgets/trending_recipe_details_section.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/trending_recipe_hero_card.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/trending_recipe_ingredients_section.dart';
+import 'package:dishdash/features/trending_recipes/presentation/trending_recipe_reviews_page.dart';
 import 'package:flutter/material.dart';
 
 class TrendingRecipeDetailsPage extends StatelessWidget {
@@ -49,6 +50,15 @@ class TrendingRecipeDetailsPage extends StatelessWidget {
                   TrendingRecipeHeroCard(
                     details: details,
                     starIconAsset: _starIcon,
+                    onCommentsTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute<void>(
+                          builder: (_) => TrendingRecipeReviewsPage(
+                            recipeTitle: details.title,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(height: ResponsiveSize.height(16)),
                   TrendingRecipeChefRow(details: details),

@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class MissingTrendingRecipeDetails extends StatelessWidget {
   final String title;
 
-  const MissingTrendingRecipeDetails({
-    super.key,
-    required this.title,
-  });
+  const MissingTrendingRecipeDetails({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
