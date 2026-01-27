@@ -133,11 +133,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _handleNotificationTap() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (_) => const NotificationsPage(),
-      ),
-    );
+    Navigator.of(
+      context,
+    ).push(MaterialPageRoute<void>(builder: (_) => const NotificationsPage()));
   }
 
   void _handleSearchTap() {

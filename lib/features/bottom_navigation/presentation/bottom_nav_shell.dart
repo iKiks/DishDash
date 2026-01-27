@@ -90,19 +90,14 @@ class _TabNavigator extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget child;
 
-  const _TabNavigator({
-    required this.navigatorKey,
-    required this.child,
-  });
+  const _TabNavigator({required this.navigatorKey, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
       key: navigatorKey,
       onGenerateRoute: (_) {
-        return MaterialPageRoute<void>(
-          builder: (_) => child,
-        );
+        return MaterialPageRoute<void>(builder: (_) => child);
       },
     );
   }
@@ -136,9 +131,7 @@ class DishDashBottomNavBar extends StatelessWidget {
         borderRadius: BorderRadius.all(radius),
         child: Container(
           height: height,
-          decoration: const BoxDecoration(
-            color: AppColors.redPink,
-          ),
+          decoration: const BoxDecoration(color: AppColors.redPink),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -211,11 +204,7 @@ class _NavItem extends StatelessWidget {
           width: ResponsiveSize.width(56),
           height: double.infinity,
           child: Center(
-            child: Icon(
-              icon,
-              size: iconSize,
-              color: color,
-            ),
+            child: Icon(icon, size: iconSize, color: color),
           ),
         ),
       ),

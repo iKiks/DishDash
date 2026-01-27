@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 class NotificationsPage extends StatelessWidget {
   static const _backArrowIcon = 'lib/core/assets/icons/arrow.png';
-  static const _notificationIcon = 'lib/core/assets/icons/notification_button.png';
+  static const _notificationIcon =
+      'lib/core/assets/icons/notification_button.png';
   static const _starIcon = 'lib/core/assets/icons/star.png';
 
   const NotificationsPage({super.key});
@@ -61,7 +62,8 @@ class NotificationsPage extends StatelessWidget {
                     ),
                     _NotificationItemData(
                       title: 'Reminder',
-                      message: "Don't forget to complete your profile to\naccess all app features",
+                      message:
+                          "Don't forget to complete your profile to\naccess all app features",
                       trailing: '25 April 2024',
                       iconAsset: _starIcon,
                     ),
@@ -100,10 +102,7 @@ class _Header extends StatelessWidget {
   final String title;
   final VoidCallback onBack;
 
-  const _Header({
-    required this.title,
-    required this.onBack,
-  });
+  const _Header({required this.title, required this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -141,10 +140,7 @@ class _Section extends StatelessWidget {
   final String title;
   final List<_NotificationItemData> items;
 
-  const _Section({
-    required this.title,
-    required this.items,
-  });
+  const _Section({required this.title, required this.items});
 
   @override
   Widget build(BuildContext context) {
