@@ -27,8 +27,12 @@ class _BottomNavShellState extends State<BottomNavShell> {
 
     final bottomSafe = MediaQuery.of(context).padding.bottom;
     final barHeight = ResponsiveSize.height(70);
-    final barMargin = ResponsiveSize.height(12) + bottomSafe;
-    final contentBottomPadding = barHeight + barMargin;
+    final barGapFromBottom = ResponsiveSize.height(12); // visual gap
+    final barBottom = barGapFromBottom + bottomSafe;
+
+    // How much to inset pages so important UI isn't hidden behind the floating bar.
+    // (barHeight + barBottom) is the space the bar occupies visually.
+    final pageBottomInset = barHeight + barBottom;
 
     return Scaffold(
       backgroundColor: AppColors.white,
@@ -36,34 +40,38 @@ class _BottomNavShellState extends State<BottomNavShell> {
         bottom: false,
         child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: contentBottomPadding),
-              child: IndexedStack(
-                index: _selectedIndex,
-                children: [
-                  _TabNavigator(
-                    navigatorKey: _navigatorKeys[0],
-                    child: const HomePage(),
-                  ),
-                  _TabNavigator(
-                    navigatorKey: _navigatorKeys[1],
-                    child: const CommunityPage(),
-                  ),
-                  _TabNavigator(
-                    navigatorKey: _navigatorKeys[2],
-                    child: const CategoriesPage(),
-                  ),
-                  _TabNavigator(
-                    navigatorKey: _navigatorKeys[3],
-                    child: const ProfilePage(),
-                  ),
-                ],
-              ),
+            // ✅ NO reserved padding here — pages go full height behind the bar.
+            IndexedStack(
+              index: _selectedIndex,
+              children: [
+                _TabNavigator(
+                  navigatorKey: _navigatorKeys[0],
+                  bottomInset: pageBottomInset,
+                  child: const HomePage(),
+                ),
+                _TabNavigator(
+                  navigatorKey: _navigatorKeys[1],
+                  bottomInset: pageBottomInset,
+                  child: const CommunityPage(),
+                ),
+                _TabNavigator(
+                  navigatorKey: _navigatorKeys[2],
+                  bottomInset: pageBottomInset,
+                  child: const CategoriesPage(),
+                ),
+                _TabNavigator(
+                  navigatorKey: _navigatorKeys[3],
+                  bottomInset: pageBottomInset,
+                  child: const ProfilePage(),
+                ),
+              ],
             ),
+
+            // ✅ Floating nav
             Positioned(
               left: ResponsiveSize.width(28),
               right: ResponsiveSize.width(28),
-              bottom: barMargin,
+              bottom: barBottom,
               child: DishDashBottomNavBar(
                 height: barHeight,
                 selectedIndex: _selectedIndex,
@@ -81,7 +89,6 @@ class _BottomNavShellState extends State<BottomNavShell> {
       _navigatorKeys[index].currentState?.popUntil((route) => route.isFirst);
       return;
     }
-
     setState(() => _selectedIndex = index);
   }
 }
@@ -89,15 +96,32 @@ class _BottomNavShellState extends State<BottomNavShell> {
 class _TabNavigator extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey;
   final Widget child;
+  final double bottomInset;
 
-  const _TabNavigator({required this.navigatorKey, required this.child});
+  const _TabNavigator({
+    required this.navigatorKey,
+    required this.child,
+    required this.bottomInset,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Navigator(
       key: navigatorKey,
       onGenerateRoute: (_) {
-        return MaterialPageRoute<void>(builder: (_) => child);
+        return MaterialPageRoute<void>(
+          builder: (_) {
+            // ✅ This is the key: pages render behind the bar,
+            // but the page gets an inset so its bottom content isn't hidden.
+            return SafeArea(
+              bottom: false,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: bottomInset),
+                child: child,
+              ),
+            );
+          },
+        );
       },
     );
   }
