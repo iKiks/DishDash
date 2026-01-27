@@ -7,11 +7,7 @@ class MetaInline extends StatelessWidget {
   final String iconAsset;
   final String text;
 
-  const MetaInline({
-    super.key,
-    required this.iconAsset,
-    required this.text,
-  });
+  const MetaInline({super.key, required this.iconAsset, required this.text});
 
   @override
   Widget build(BuildContext context) {

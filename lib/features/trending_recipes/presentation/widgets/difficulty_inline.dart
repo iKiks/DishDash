@@ -6,10 +6,7 @@ import 'package:flutter/material.dart';
 class DifficultyInline extends StatelessWidget {
   final String text;
 
-  const DifficultyInline({
-    super.key,
-    required this.text,
-  });
+  const DifficultyInline({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

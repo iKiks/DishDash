@@ -59,10 +59,7 @@ class MostViewedCard extends StatelessWidget {
                       borderRadius: imageRadius,
                       child: AspectRatio(
                         aspectRatio: 335 / 170,
-                        child: Image.asset(
-                          imageAsset,
-                          fit: BoxFit.cover,
-                        ),
+                        child: Image.asset(imageAsset, fit: BoxFit.cover),
                       ),
                     ),
                   ),

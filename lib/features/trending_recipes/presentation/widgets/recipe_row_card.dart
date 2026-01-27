@@ -1,7 +1,7 @@
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
-import 'package:dishdash/features/trending_recipes/presentation/models/trending_recipe.dart';
+import 'package:dishdash/features/trending_recipes/domain/entities/trending_recipe.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/difficulty_inline.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/meta_inline.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,7 @@ import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/search_popup.dart';
 import 'package:dishdash/features/notifications/presentation/notifications_page.dart';
-import 'package:dishdash/features/trending_recipes/presentation/models/trending_recipe.dart';
+import 'package:dishdash/features/trending_recipes/domain/entities/trending_recipe.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/most_viewed_card.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/recipe_row_card.dart';
 import 'package:dishdash/features/trending_recipes/presentation/widgets/trending_recipes_header.dart';
