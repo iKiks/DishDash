@@ -7,6 +7,7 @@ import 'package:dishdash/features/home_page/presentation/widgets/recipe_cards.da
 import 'package:dishdash/features/home_page/presentation/widgets/search_popup.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/top_chef_row.dart';
 import 'package:dishdash/features/notifications/presentation/notifications_page.dart';
+import 'package:dishdash/features/trending_recipes/presentation/trending_recipes_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -92,10 +93,14 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.symmetric(
                   horizontal: pageHorizontalPadding,
                 ),
-                child: TrendingCard(
-                  favoriteIconAsset: favoriteIcon,
-                  clockIconAsset: _clockIcon,
-                  starIconAsset: _starIcon,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(22),
+                  onTap: _handleTrendingRecipeTap,
+                  child: TrendingCard(
+                    favoriteIconAsset: favoriteIcon,
+                    clockIconAsset: _clockIcon,
+                    starIconAsset: _starIcon,
+                  ),
                 ),
               ),
               SizedBox(height: ResponsiveSize.height(40)),
@@ -136,6 +141,12 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(
       context,
     ).push(MaterialPageRoute<void>(builder: (_) => const NotificationsPage()));
+  }
+
+  void _handleTrendingRecipeTap() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const TrendingRecipesPage()),
+    );
   }
 
   void _handleSearchTap() {

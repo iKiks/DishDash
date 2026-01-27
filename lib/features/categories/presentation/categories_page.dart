@@ -162,10 +162,7 @@ class _CategoryTile extends StatelessWidget {
         Expanded(
           child: ClipRRect(
             borderRadius: radius,
-            child: Image.asset(
-              item.imageAsset,
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset(item.imageAsset, fit: BoxFit.cover),
           ),
         ),
         SizedBox(height: ResponsiveSize.height(8)),
