@@ -396,6 +396,7 @@ class _ReviewBox extends StatelessWidget {
         textCapitalization: TextCapitalization.sentences,
         autocorrect: true,
         enableSuggestions: true,
+        onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
         maxLines: 6,
         decoration: const InputDecoration(
           border: InputBorder.none,
