@@ -344,15 +344,26 @@ class _StarPicker extends StatelessWidget {
       children: List.generate(5, (i) {
         final idx = i + 1;
         final filled = idx <= value;
-        return InkWell(
-          onTap: () => onChanged(idx),
-          borderRadius: BorderRadius.circular(999),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: ResponsiveSize.width(6)),
-            child: Icon(
-              filled ? Icons.star : Icons.star_border,
-              size: size,
-              color: AppColors.redPink,
+        final starsLabel = 'Rate $idx star${idx == 1 ? '' : 's'}';
+        return Tooltip(
+          message: starsLabel,
+          child: Semantics(
+            button: true,
+            selected: idx == value,
+            label: starsLabel,
+            child: InkWell(
+              onTap: () => onChanged(idx),
+              borderRadius: BorderRadius.circular(999),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveSize.width(6),
+                ),
+                child: Icon(
+                  filled ? Icons.star : Icons.star_border,
+                  size: size,
+                  color: AppColors.redPink,
+                ),
+              ),
             ),
           ),
         );
