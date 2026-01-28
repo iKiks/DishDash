@@ -391,10 +391,15 @@ class _ReviewBox extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
+        keyboardType: TextInputType.multiline,
+        textInputAction: TextInputAction.newline,
+        textCapitalization: TextCapitalization.sentences,
+        autocorrect: true,
+        enableSuggestions: true,
         maxLines: 6,
         decoration: const InputDecoration(
           border: InputBorder.none,
-          hintText: 'Leave us Review!',
+          hintText: 'Leave us a review…',
         ),
       ),
     );
