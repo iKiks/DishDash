@@ -105,26 +105,7 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                 SizedBox(height: ResponsiveSize.height(18)),
                 LeaveReviewReviewBox(controller: _controller),
                 SizedBox(height: ResponsiveSize.height(10)),
-                TextButton.icon(
-                  onPressed: () {},
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    foregroundColor: AppColors.black,
-                    alignment: Alignment.centerLeft,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  icon: Icon(
-                    Icons.add_circle_outline,
-                    color: AppColors.redPink.withAlpha(200),
-                    size: ResponsiveSize.width(18),
-                  ),
-                  label: AppTexts(
-                    'Add Photo',
-                    fontSize: ResponsiveSize.fontSize(13),
-                    color: AppColors.black,
-                    fontWeightToken: AppFontWeight.medium,
-                  ),
-                ),
+                LeaveReviewAddPhotoButton(onPressed: () {}),
                 SizedBox(height: ResponsiveSize.height(18)),
                 AppTexts(
                   'Do you recommend this recipe?',
