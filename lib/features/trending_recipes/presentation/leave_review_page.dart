@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dishdash/core/theme/app_colors.dart';
 import 'package:dishdash/core/utils/responsiveness/app_responsiveness.dart';
 import 'package:dishdash/core/widgets/texts/app_texts.dart';
@@ -152,7 +154,8 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                         label: 'Submit',
                         filled: true,
                         onTap: () {
-                          _showThankYouDialog();
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          unawaited(_showThankYouDialog());
                         },
                       ),
                     ),
