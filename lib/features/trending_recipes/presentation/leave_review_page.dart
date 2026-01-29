@@ -25,6 +25,20 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
   int _rating = 3;
   bool _recommended = false;
   final TextEditingController _controller = TextEditingController();
+  bool _canSubmit = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(_handleReviewChanged);
+    _handleReviewChanged();
+  }
+
+  void _handleReviewChanged() {
+    final canSubmitNow = _controller.text.trim().isNotEmpty;
+    if (canSubmitNow == _canSubmit) return;
+    setState(() => _canSubmit = canSubmitNow);
+  }
 
   Future<void> _showThankYouDialog() async {
     await showDialog<void>(
@@ -46,6 +60,7 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
 
   @override
   void dispose() {
+    _controller.removeListener(_handleReviewChanged);
     _controller.dispose();
     super.dispose();
   }
@@ -153,6 +168,7 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                       child: _ActionButton(
                         label: 'Submit',
                         filled: true,
+                        enabled: _canSubmit,
                         onTap: () {
                           FocusManager.instance.primaryFocus?.unfocus();
                           unawaited(_showThankYouDialog());
@@ -461,21 +477,28 @@ class _RadioOption extends StatelessWidget {
 class _ActionButton extends StatelessWidget {
   final String label;
   final bool filled;
-  final VoidCallback onTap;
+  final bool enabled;
+  final VoidCallback? onTap;
 
   const _ActionButton({
     required this.label,
     required this.filled,
     required this.onTap,
+    this.enabled = true,
   });
 
   @override
   Widget build(BuildContext context) {
-    final bg = filled ? AppColors.redPink : AppColors.pink;
-    final fg = filled ? Colors.white : AppColors.redPink.withAlpha(130);
+    final isEnabled = enabled && onTap != null;
+    final bg = filled
+        ? (isEnabled ? AppColors.redPink : AppColors.redPink.withAlpha(120))
+        : (isEnabled ? AppColors.pink : AppColors.pink.withAlpha(120));
+    final fg = filled
+        ? (isEnabled ? Colors.white : Colors.white.withAlpha(200))
+        : (isEnabled ? AppColors.redPink.withAlpha(130) : AppColors.redPink.withAlpha(90));
 
     return InkWell(
-      onTap: onTap,
+      onTap: isEnabled ? onTap : null,
       borderRadius: BorderRadius.circular(999),
       child: Container(
         height: ResponsiveSize.height(52),
