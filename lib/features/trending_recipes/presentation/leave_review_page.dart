@@ -107,24 +107,24 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                 SizedBox(height: ResponsiveSize.height(18)),
                 _ReviewBox(controller: _controller),
                 SizedBox(height: ResponsiveSize.height(10)),
-                InkWell(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.add_circle_outline,
-                        color: AppColors.redPink.withAlpha(200),
-                        size: ResponsiveSize.width(18),
-                      ),
-                      SizedBox(width: ResponsiveSize.width(10)),
-                      AppTexts(
-                        'Add Photo',
-                        fontSize: ResponsiveSize.fontSize(13),
-                        color: AppColors.black,
-                        fontWeightToken: AppFontWeight.medium,
-                      ),
-                    ],
+                TextButton.icon(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    foregroundColor: AppColors.black,
+                    alignment: Alignment.centerLeft,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  icon: Icon(
+                    Icons.add_circle_outline,
+                    color: AppColors.redPink.withAlpha(200),
+                    size: ResponsiveSize.width(18),
+                  ),
+                  label: AppTexts(
+                    'Add Photo',
+                    fontSize: ResponsiveSize.fontSize(13),
+                    color: AppColors.black,
+                    fontWeightToken: AppFontWeight.medium,
                   ),
                 ),
                 SizedBox(height: ResponsiveSize.height(18)),
