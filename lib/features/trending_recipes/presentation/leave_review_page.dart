@@ -29,8 +29,8 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
       context: context,
       barrierDismissible: false,
       builder: (dialogContext) {
-        return WillPopScope(
-          onWillPop: () async => false,
+        return PopScope(
+          canPop: false,
           child: _ThankYouForReviewDialog(
             onGoHome: () {
               Navigator.of(dialogContext).pop();
