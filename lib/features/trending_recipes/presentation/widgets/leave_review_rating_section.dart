@@ -19,10 +19,7 @@ class LeaveReviewRatingSection extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          LeaveReviewStarPicker(
-            value: rating,
-            onChanged: onRatingChanged,
-          ),
+          LeaveReviewStarPicker(value: rating, onChanged: onRatingChanged),
           SizedBox(height: ResponsiveSize.height(6)),
           AppTexts(
             'Your overall rating',

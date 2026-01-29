@@ -107,56 +107,19 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                 SizedBox(height: ResponsiveSize.height(10)),
                 LeaveReviewAddPhotoButton(onPressed: () {}),
                 SizedBox(height: ResponsiveSize.height(18)),
-                AppTexts(
-                  'Do you recommend this recipe?',
-                  fontSize: ResponsiveSize.fontSize(12),
-                  color: AppColors.black,
-                  fontWeightToken: AppFontWeight.medium,
-                ),
-                SizedBox(height: ResponsiveSize.height(10)),
-                Row(
-                  children: [
-                    Expanded(
-                      child: LeaveReviewRadioOption(
-                        label: 'No',
-                        semanticsLabel: 'Recommend: No',
-                        selected: !_recommended,
-                        onTap: () => setState(() => _recommended = false),
-                      ),
-                    ),
-                    Expanded(
-                      child: LeaveReviewRadioOption(
-                        label: 'Yes',
-                        semanticsLabel: 'Recommend: Yes',
-                        selected: _recommended,
-                        onTap: () => setState(() => _recommended = true),
-                      ),
-                    ),
-                  ],
+                LeaveReviewRecommendationSection(
+                  recommended: _recommended,
+                  onRecommendationChanged: (v) =>
+                      setState(() => _recommended = v),
                 ),
                 SizedBox(height: ResponsiveSize.height(26)),
-                Row(
-                  children: [
-                    Expanded(
-                      child: LeaveReviewActionButton(
-                        label: 'Cancel',
-                        filled: false,
-                        onTap: () => Navigator.of(context).maybePop(),
-                      ),
-                    ),
-                    SizedBox(width: ResponsiveSize.width(18)),
-                    Expanded(
-                      child: LeaveReviewActionButton(
-                        label: 'Submit',
-                        filled: true,
-                        enabled: _canSubmit,
-                        onTap: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          unawaited(_showThankYouDialog());
-                        },
-                      ),
-                    ),
-                  ],
+                LeaveReviewButtonsSection(
+                  onCancel: () => Navigator.of(context).maybePop(),
+                  onSubmit: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    unawaited(_showThankYouDialog());
+                  },
+                  submitEnabled: _canSubmit,
                 ),
                 SizedBox(height: ResponsiveSize.height(120)),
               ],
