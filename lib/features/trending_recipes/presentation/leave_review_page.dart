@@ -140,6 +140,7 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                     Expanded(
                       child: _RadioOption(
                         label: 'No',
+                        semanticsLabel: 'Recommend: No',
                         selected: !_recommended,
                         onTap: () => setState(() => _recommended = false),
                       ),
@@ -147,6 +148,7 @@ class _LeaveReviewPageState extends State<LeaveReviewPage> {
                     Expanded(
                       child: _RadioOption(
                         label: 'Yes',
+                        semanticsLabel: 'Recommend: Yes',
                         selected: _recommended,
                         onTap: () => setState(() => _recommended = true),
                       ),
@@ -428,47 +430,54 @@ class _ReviewBox extends StatelessWidget {
 
 class _RadioOption extends StatelessWidget {
   final String label;
+  final String? semanticsLabel;
   final bool selected;
   final VoidCallback onTap;
 
   const _RadioOption({
     required this.label,
+    this.semanticsLabel,
     required this.selected,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AppTexts(
-            label,
-            fontSize: ResponsiveSize.fontSize(13),
-            color: AppColors.black,
-            fontWeightToken: AppFontWeight.medium,
-          ),
-          SizedBox(width: ResponsiveSize.width(8)),
-          Container(
-            width: ResponsiveSize.width(16),
-            height: ResponsiveSize.width(16),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(color: AppColors.redPink, width: 2),
+    return Semantics(
+      button: true,
+      selected: selected,
+      label: semanticsLabel ?? label,
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppTexts(
+              label,
+              fontSize: ResponsiveSize.fontSize(13),
+              color: AppColors.black,
+              fontWeightToken: AppFontWeight.medium,
             ),
-            alignment: Alignment.center,
-            child: Container(
-              width: ResponsiveSize.width(8),
-              height: ResponsiveSize.width(8),
+            SizedBox(width: ResponsiveSize.width(8)),
+            Container(
+              width: ResponsiveSize.width(16),
+              height: ResponsiveSize.width(16),
               decoration: BoxDecoration(
-                color: selected ? AppColors.redPink : Colors.transparent,
                 shape: BoxShape.circle,
+                border: Border.all(color: AppColors.redPink, width: 2),
+              ),
+              alignment: Alignment.center,
+              child: Container(
+                width: ResponsiveSize.width(8),
+                height: ResponsiveSize.width(8),
+                decoration: BoxDecoration(
+                  color: selected ? AppColors.redPink : Colors.transparent,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
