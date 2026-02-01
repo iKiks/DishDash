@@ -68,10 +68,13 @@ class TrendingRecipesHeader extends StatelessWidget {
           ),
         ),
         SizedBox(width: ResponsiveSize.width(10)),
-        RoundIconButton(
-          onTap: onSearchTap,
-          assetPath: searchIconAsset,
-          semanticsLabel: 'Search',
+        Tooltip(
+          message: 'Search',
+          child: RoundIconButton(
+            onTap: onSearchTap,
+            assetPath: searchIconAsset,
+            semanticsLabel: 'Search',
+          ),
         ),
       ],
     );
