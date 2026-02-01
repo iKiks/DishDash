@@ -27,6 +27,7 @@ class TrendingRecipesHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(28);
+    final backTapRadius = ResponsiveSize.width(24);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,7 +39,7 @@ class TrendingRecipesHeader extends StatelessWidget {
             label: 'Back',
             child: InkResponse(
               onTap: onBack,
-              radius: ResponsiveSize.width(24),
+              radius: backTapRadius,
               child: Image.asset(
                 backIconAsset,
                 semanticLabel: 'Back',
