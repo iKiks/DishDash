@@ -28,6 +28,7 @@ class TrendingRecipesHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(28);
     final backTapRadius = ResponsiveSize.width(24);
+    final iconGap = ResponsiveSize.width(10);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +75,7 @@ class TrendingRecipesHeader extends StatelessWidget {
             semanticsLabel: 'Notifications',
           ),
         ),
-        SizedBox(width: ResponsiveSize.width(10)),
+        SizedBox(width: iconGap),
         Tooltip(
           message: 'Search',
           child: RoundIconButton(
