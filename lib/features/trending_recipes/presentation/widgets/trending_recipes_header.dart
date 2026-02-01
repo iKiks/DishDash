@@ -29,6 +29,7 @@ class TrendingRecipesHeader extends StatelessWidget {
     final iconSize = ResponsiveSize.width(28);
 
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Tooltip(
           message: 'Back',
