@@ -51,14 +51,17 @@ class TrendingRecipesHeader extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: AppTexts(
-              title,
-              fontSize: ResponsiveSize.fontSize(20),
-              color: AppColors.redPink,
-              fontWeightToken: AppFontWeight.semiBold,
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            child: Semantics(
+              header: true,
+              child: AppTexts(
+                title,
+                fontSize: ResponsiveSize.fontSize(20),
+                color: AppColors.redPink,
+                fontWeightToken: AppFontWeight.semiBold,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
         ),
