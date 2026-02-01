@@ -30,17 +30,20 @@ class TrendingRecipesHeader extends StatelessWidget {
 
     return Row(
       children: [
-        Semantics(
-          button: true,
-          label: 'Back',
-          child: InkResponse(
-            onTap: onBack,
-            radius: ResponsiveSize.width(24),
-            child: Image.asset(
-              backIconAsset,
-              width: iconSize,
-              height: iconSize,
-              fit: BoxFit.contain,
+        Tooltip(
+          message: 'Back',
+          child: Semantics(
+            button: true,
+            label: 'Back',
+            child: InkResponse(
+              onTap: onBack,
+              radius: ResponsiveSize.width(24),
+              child: Image.asset(
+                backIconAsset,
+                width: iconSize,
+                height: iconSize,
+                fit: BoxFit.contain,
+              ),
             ),
           ),
         ),
