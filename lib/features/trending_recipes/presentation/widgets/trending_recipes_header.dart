@@ -59,10 +59,13 @@ class TrendingRecipesHeader extends StatelessWidget {
             ),
           ),
         ),
-        RoundIconButton(
-          onTap: onNotificationTap,
-          assetPath: notificationIconAsset,
-          semanticsLabel: 'Notifications',
+        Tooltip(
+          message: 'Notifications',
+          child: RoundIconButton(
+            onTap: onNotificationTap,
+            assetPath: notificationIconAsset,
+            semanticsLabel: 'Notifications',
+          ),
         ),
         SizedBox(width: ResponsiveSize.width(10)),
         RoundIconButton(
