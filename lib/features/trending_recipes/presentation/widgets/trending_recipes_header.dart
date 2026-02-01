@@ -40,6 +40,7 @@ class TrendingRecipesHeader extends StatelessWidget {
               radius: ResponsiveSize.width(24),
               child: Image.asset(
                 backIconAsset,
+                semanticLabel: 'Back',
                 width: iconSize,
                 height: iconSize,
                 fit: BoxFit.contain,
