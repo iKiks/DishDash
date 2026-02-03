@@ -12,8 +12,11 @@ class TrendingRecipesHeader extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onNotificationTap;
   final VoidCallback onSearchTap;
+  /// Text label for the back button
   final String backIconAsset;
+  /// Text label for the notification button
   final String notificationIconAsset;
+  /// Text label for the search button
   final String searchIconAsset;
 
   const TrendingRecipesHeader({
