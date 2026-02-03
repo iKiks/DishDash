@@ -30,6 +30,11 @@ class TrendingRecipesHeader extends StatelessWidget {
     required this.searchIconAsset,
   });
 
+  /// Logs user action for analytics
+  void _logAnalytics(String action) {
+    // TODO: Implement analytics logging
+  }
+
   @override
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(28);
