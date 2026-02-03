@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 // Edit 1: Add documentation comment
 
+/// A header widget for trending recipes page with navigation controls.
 class TrendingRecipesHeader extends StatelessWidget {
   final String title;
   final VoidCallback onBack;
