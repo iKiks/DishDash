@@ -4,6 +4,8 @@ import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 
+// Edit 1: Add documentation comment
+
 class TrendingRecipesHeader extends StatelessWidget {
   final String title;
   final VoidCallback onBack;
