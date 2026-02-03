@@ -52,7 +52,10 @@ class TrendingRecipesHeader extends StatelessWidget {
             button: true,
             label: 'Back',
             child: InkResponse(
-              onTap: onBack,
+              onTap: () {
+                _logAnalytics('back');
+                onBack();
+              },
               radius: backTapRadius,
               child: Image.asset(
                 backIconAsset,
@@ -83,7 +86,10 @@ class TrendingRecipesHeader extends StatelessWidget {
         Tooltip(
           message: 'Notifications',
           child: RoundIconButton(
-            onTap: onNotificationTap,
+            onTap: () {
+              _logAnalytics('notifications');
+              onNotificationTap();
+            },
             assetPath: notificationIconAsset,
             semanticsLabel: 'Notifications',
           ),
@@ -92,7 +98,10 @@ class TrendingRecipesHeader extends StatelessWidget {
         Tooltip(
           message: 'Search',
           child: RoundIconButton(
-            onTap: onSearchTap,
+            onTap: () {
+              _logAnalytics('search');
+              onSearchTap();
+            },
             assetPath: searchIconAsset,
             semanticsLabel: 'Search',
           ),
