@@ -39,8 +39,9 @@ class TrendingRecipesHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(28);
     final backTapRadius = ResponsiveSize.width(24);
-    final iconGap = ResponsiveSize.width(10);
     final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final iconGap = ResponsiveSize.width(isLandscape ? 6 : 10);
+    final titleFontSize = ResponsiveSize.fontSize(isLandscape ? 18 : 20);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -69,7 +70,7 @@ class TrendingRecipesHeader extends StatelessWidget {
               header: true,
               child: AppTexts(
                 title,
-                fontSize: ResponsiveSize.fontSize(20),
+                fontSize: titleFontSize,
                 color: AppColors.redPink,
                 fontWeightToken: AppFontWeight.semiBold,
                 textAlign: TextAlign.center,
