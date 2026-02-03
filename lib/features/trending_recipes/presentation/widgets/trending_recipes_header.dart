@@ -4,8 +4,6 @@ import 'package:dishdash/core/widgets/texts/app_texts.dart';
 import 'package:dishdash/features/home_page/presentation/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 
-// Edit 1: Add documentation comment
-
 /// A header widget for trending recipes page with navigation controls.
 class TrendingRecipesHeader extends StatelessWidget {
   static const _tooltipBack = 'Back';
