@@ -8,6 +8,14 @@ import 'package:flutter/material.dart';
 
 /// A header widget for trending recipes page with navigation controls.
 class TrendingRecipesHeader extends StatelessWidget {
+  static const _tooltipBack = 'Back';
+  static const _tooltipNotifications = 'Notifications';
+  static const _tooltipSearch = 'Search';
+
+  static const _analyticsBack = 'back';
+  static const _analyticsNotifications = 'notifications';
+  static const _analyticsSearch = 'search';
+
   final String title;
   final VoidCallback onBack;
   final VoidCallback onNotificationTap;
@@ -47,19 +55,19 @@ class TrendingRecipesHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Tooltip(
-          message: 'Back',
+          message: _tooltipBack,
           child: Semantics(
             button: true,
-            label: 'Back',
+            label: _tooltipBack,
             child: InkResponse(
               onTap: () {
-                _logAnalytics('back');
+                _logAnalytics(_analyticsBack);
                 onBack();
               },
               radius: backTapRadius,
               child: Image.asset(
                 backIconAsset,
-                semanticLabel: 'Back',
+                semanticLabel: _tooltipBack,
                 width: iconSize,
                 height: iconSize,
                 fit: BoxFit.contain,
@@ -84,26 +92,26 @@ class TrendingRecipesHeader extends StatelessWidget {
           ),
         ),
         Tooltip(
-          message: 'Notifications',
+          message: _tooltipNotifications,
           child: RoundIconButton(
             onTap: () {
-              _logAnalytics('notifications');
+              _logAnalytics(_analyticsNotifications);
               onNotificationTap();
             },
             assetPath: notificationIconAsset,
-            semanticsLabel: 'Notifications',
+            semanticsLabel: _tooltipNotifications,
           ),
         ),
         SizedBox(width: iconGap),
         Tooltip(
-          message: 'Search',
+          message: _tooltipSearch,
           child: RoundIconButton(
             onTap: () {
-              _logAnalytics('search');
+              _logAnalytics(_analyticsSearch);
               onSearchTap();
             },
             assetPath: searchIconAsset,
-            semanticsLabel: 'Search',
+            semanticsLabel: _tooltipSearch,
           ),
         ),
       ],
