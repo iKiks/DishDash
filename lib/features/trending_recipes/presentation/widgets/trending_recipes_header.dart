@@ -20,11 +20,14 @@ class TrendingRecipesHeader extends StatelessWidget {
   final VoidCallback onBack;
   final VoidCallback onNotificationTap;
   final VoidCallback onSearchTap;
-  /// Text label for the back button
+
+  /// Asset path for the back icon.
   final String backIconAsset;
-  /// Text label for the notification button
+
+  /// Asset path for the notification icon.
   final String notificationIconAsset;
-  /// Text label for the search button
+
+  /// Asset path for the search icon.
   final String searchIconAsset;
 
   const TrendingRecipesHeader({
@@ -47,7 +50,8 @@ class TrendingRecipesHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(28);
     final backTapRadius = ResponsiveSize.width(24);
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final iconGap = ResponsiveSize.width(isLandscape ? 6 : 10);
     final titleFontSize = ResponsiveSize.fontSize(isLandscape ? 18 : 20);
 
