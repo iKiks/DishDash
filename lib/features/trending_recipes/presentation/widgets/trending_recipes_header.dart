@@ -40,6 +40,7 @@ class TrendingRecipesHeader extends StatelessWidget {
     final iconSize = ResponsiveSize.width(28);
     final backTapRadius = ResponsiveSize.width(24);
     final iconGap = ResponsiveSize.width(10);
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
