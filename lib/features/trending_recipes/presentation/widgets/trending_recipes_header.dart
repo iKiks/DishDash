@@ -18,6 +18,8 @@ class TrendingRecipesHeader extends StatelessWidget {
   static const _backTapRadiusBase = 24.0;
   static const _gapLandscape = 6.0;
   static const _gapPortrait = 10.0;
+  static const _fontSizeLandscape = 18.0;
+  static const _fontSizePortrait = 20.0;
 
   final String title;
   final VoidCallback onBack;
