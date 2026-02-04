@@ -16,6 +16,8 @@ class TrendingRecipesHeader extends StatelessWidget {
 
   static const _iconSizeBase = 28.0;
   static const _backTapRadiusBase = 24.0;
+  static const _gapLandscape = 6.0;
+  static const _gapPortrait = 10.0;
 
   final String title;
   final VoidCallback onBack;
