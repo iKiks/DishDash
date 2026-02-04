@@ -107,22 +107,7 @@ class TrendingRecipesHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildBackButton(iconSize, backTapRadius),
-        Expanded(
-          child: Center(
-            child: Semantics(
-              header: true,
-              child: AppTexts(
-                title,
-                fontSize: titleFontSize,
-                color: AppColors.redPink,
-                fontWeightToken: AppFontWeight.semiBold,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          ),
-        ),
+        _buildTitle(titleFontSize),
         Tooltip(
           message: _tooltipNotifications,
           child: RoundIconButton(
