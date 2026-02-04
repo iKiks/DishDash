@@ -49,6 +49,30 @@ class TrendingRecipesHeader extends StatelessWidget {
     // TODO: Implement analytics logging
   }
 
+  Widget _buildBackButton(double iconSize, double backTapRadius) {
+    return Tooltip(
+      message: _tooltipBack,
+      child: Semantics(
+        button: true,
+        label: _tooltipBack,
+        child: InkResponse(
+          onTap: () {
+            _logAnalytics(_analyticsBack);
+            onBack();
+          },
+          radius: backTapRadius,
+          child: Image.asset(
+            backIconAsset,
+            semanticLabel: _tooltipBack,
+            width: iconSize,
+            height: iconSize,
+            fit: BoxFit.contain,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(_iconSizeBase);
