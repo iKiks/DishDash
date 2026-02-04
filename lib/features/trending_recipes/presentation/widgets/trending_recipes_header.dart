@@ -14,6 +14,9 @@ class TrendingRecipesHeader extends StatelessWidget {
   static const _analyticsNotifications = 'notifications';
   static const _analyticsSearch = 'search';
 
+  static const _iconSizeBase = 28.0;
+  static const _backTapRadiusBase = 24.0;
+
   final String title;
   final VoidCallback onBack;
   final VoidCallback onNotificationTap;
