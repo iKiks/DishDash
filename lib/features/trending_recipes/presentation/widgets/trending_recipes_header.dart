@@ -73,6 +73,25 @@ class TrendingRecipesHeader extends StatelessWidget {
     );
   }
 
+  Widget _buildTitle(double fontSize) {
+    return Expanded(
+      child: Center(
+        child: Semantics(
+          header: true,
+          child: AppTexts(
+            title,
+            fontSize: fontSize,
+            color: AppColors.redPink,
+            fontWeightToken: AppFontWeight.semiBold,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(_iconSizeBase);
