@@ -49,8 +49,8 @@ class TrendingRecipesHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconSize = ResponsiveSize.width(28);
-    final backTapRadius = ResponsiveSize.width(24);
+    final iconSize = ResponsiveSize.width(_iconSizeBase);
+    final backTapRadius = ResponsiveSize.width(_backTapRadiusBase);
     final isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     final iconGap = ResponsiveSize.width(isLandscape ? 6 : 10);
