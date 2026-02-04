@@ -103,7 +103,9 @@ class TrendingRecipesHeader extends StatelessWidget {
     final iconGap = ResponsiveSize.width(
       isLandscape ? _gapLandscape : _gapPortrait,
     );
-    final titleFontSize = ResponsiveSize.fontSize(isLandscape ? 18 : 20);
+    final titleFontSize = ResponsiveSize.fontSize(
+      isLandscape ? _fontSizeLandscape : _fontSizePortrait,
+    );
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
