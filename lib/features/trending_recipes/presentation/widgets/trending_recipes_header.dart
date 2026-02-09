@@ -48,7 +48,11 @@ class TrendingRecipesHeader extends StatelessWidget {
 
   /// Logs user action for analytics
   void _logAnalytics(String action) {
-    // TODO: Implement analytics logging
+    // TODO: Wire up real analytics.
+    assert(() {
+      debugPrint('TrendingRecipesHeader action: $action');
+      return true;
+    }());
   }
 
   Widget _buildBackButton(double iconSize, double backTapRadius) {
