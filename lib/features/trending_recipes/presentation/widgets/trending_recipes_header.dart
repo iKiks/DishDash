@@ -148,16 +148,12 @@ class TrendingRecipesHeader extends StatelessWidget {
           semanticsLabel: _tooltipNotifications,
         ),
         SizedBox(width: iconGap),
-        Tooltip(
-          message: _tooltipSearch,
-          child: RoundIconButton(
-            onTap: () {
-              _logAnalytics(_analyticsSearch);
-              onSearchTap();
-            },
-            assetPath: searchIconAsset,
-            semanticsLabel: _tooltipSearch,
-          ),
+        _buildActionButton(
+          tooltip: _tooltipSearch,
+          analyticsAction: _analyticsSearch,
+          onTap: onSearchTap,
+          assetPath: searchIconAsset,
+          semanticsLabel: _tooltipSearch,
         ),
       ],
     );
