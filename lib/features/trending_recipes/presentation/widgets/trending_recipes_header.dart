@@ -98,6 +98,26 @@ class TrendingRecipesHeader extends StatelessWidget {
     );
   }
 
+  Widget _buildActionButton({
+    required String tooltip,
+    required String analyticsAction,
+    required VoidCallback onTap,
+    required String assetPath,
+    required String semanticsLabel,
+  }) {
+    return Tooltip(
+      message: tooltip,
+      child: RoundIconButton(
+        onTap: () {
+          _logAnalytics(analyticsAction);
+          onTap();
+        },
+        assetPath: assetPath,
+        semanticsLabel: semanticsLabel,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final iconSize = ResponsiveSize.width(_iconSizeBase);
