@@ -52,7 +52,7 @@ class TrendingRecipesHeader extends StatelessWidget {
   void _logAnalytics(String action) {
     // TODO: Wire up real analytics.
     assert(() {
-      debugPrint('TrendingRecipesHeader action: $action');
+      debugPrint('TrendingRecipesHeader ($title) action: $action');
       return true;
     }());
   }
