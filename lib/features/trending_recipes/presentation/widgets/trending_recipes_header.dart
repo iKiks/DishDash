@@ -48,7 +48,7 @@ class TrendingRecipesHeader extends StatelessWidget {
     required this.searchIconAsset,
   });
 
-  /// Logs user action for analytics
+  /// Logs user action for analytics.
   void _logAnalytics(String action) {
     // TODO: Wire up real analytics.
     assert(() {
