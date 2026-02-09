@@ -110,6 +110,7 @@ class TrendingRecipesHeader extends StatelessWidget {
   }) {
     return Tooltip(
       message: tooltip,
+      waitDuration: _tooltipWaitDuration,
       child: RoundIconButton(
         onTap: () {
           _logAnalytics(analyticsAction);
