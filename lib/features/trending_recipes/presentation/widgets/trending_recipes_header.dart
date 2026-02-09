@@ -134,6 +134,7 @@ class TrendingRecipesHeader extends StatelessWidget {
     final titleFontSize = ResponsiveSize.fontSize(
       isLandscape ? _fontSizeLandscape : _fontSizePortrait,
     );
+    final actionGap = SizedBox(width: iconGap);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -147,7 +148,7 @@ class TrendingRecipesHeader extends StatelessWidget {
           assetPath: notificationIconAsset,
           semanticsLabel: _tooltipNotifications,
         ),
-        SizedBox(width: iconGap),
+        actionGap,
         _buildActionButton(
           tooltip: _tooltipSearch,
           analyticsAction: _analyticsSearch,
