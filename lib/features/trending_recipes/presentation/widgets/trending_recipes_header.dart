@@ -60,6 +60,7 @@ class TrendingRecipesHeader extends StatelessWidget {
   Widget _buildBackButton(double iconSize, double backTapRadius) {
     return Tooltip(
       message: _tooltipBack,
+      waitDuration: _tooltipWaitDuration,
       child: Semantics(
         button: true,
         label: _tooltipBack,
