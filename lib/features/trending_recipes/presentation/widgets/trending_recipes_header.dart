@@ -62,6 +62,7 @@ class TrendingRecipesHeader extends StatelessWidget {
     return Tooltip(
       message: _tooltipBack,
       waitDuration: _tooltipWaitDuration,
+      showDuration: _tooltipShowDuration,
       child: Semantics(
         button: true,
         label: _tooltipBack,
