@@ -66,6 +66,7 @@ class TrendingRecipesHeader extends StatelessWidget {
       child: Semantics(
         button: true,
         label: _tooltipBack,
+        hint: 'Go back',
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: InkResponse(
