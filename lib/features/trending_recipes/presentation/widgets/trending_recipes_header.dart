@@ -114,6 +114,11 @@ class TrendingRecipesHeader extends StatelessWidget {
     required String assetPath,
     required String semanticsLabel,
   }) {
+    assert(tooltip.trim().isNotEmpty);
+    assert(analyticsAction.trim().isNotEmpty);
+    assert(assetPath.trim().isNotEmpty);
+    assert(semanticsLabel.trim().isNotEmpty);
+
     return Tooltip(
       message: tooltip,
       waitDuration: _tooltipWaitDuration,
