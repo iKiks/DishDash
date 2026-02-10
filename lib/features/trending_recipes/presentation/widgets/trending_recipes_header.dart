@@ -59,6 +59,8 @@ class TrendingRecipesHeader extends StatelessWidget {
   }
 
   Widget _buildBackButton(double iconSize, double backTapRadius) {
+    assert(backIconAsset.trim().isNotEmpty);
+
     return Tooltip(
       message: _tooltipBack,
       waitDuration: _tooltipWaitDuration,
@@ -145,6 +147,8 @@ class TrendingRecipesHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    assert(title.trim().isNotEmpty);
+
     final iconSize = ResponsiveSize.width(_iconSizeBase);
     final backTapRadius = ResponsiveSize.width(_backTapRadiusBase);
     final isLandscape =
