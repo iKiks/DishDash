@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 /// A header widget for trending recipes page with navigation controls.
 class TrendingRecipesHeader extends StatelessWidget {
   static const Duration _tooltipWaitDuration = Duration(milliseconds: 300);
+  static const Duration _tooltipShowDuration = Duration(seconds: 2);
 
   static const _tooltipBack = 'Back';
   static const _tooltipNotifications = 'Notifications';
