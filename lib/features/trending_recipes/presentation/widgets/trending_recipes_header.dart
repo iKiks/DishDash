@@ -93,6 +93,7 @@ class TrendingRecipesHeader extends StatelessWidget {
       child: Center(
         child: Semantics(
           header: true,
+          label: title,
           child: AppTexts(
             title,
             fontSize: fontSize,
