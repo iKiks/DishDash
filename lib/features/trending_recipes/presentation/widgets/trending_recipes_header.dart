@@ -66,18 +66,21 @@ class TrendingRecipesHeader extends StatelessWidget {
       child: Semantics(
         button: true,
         label: _tooltipBack,
-        child: InkResponse(
-          onTap: () {
-            _logAnalytics(_analyticsBack);
-            onBack();
-          },
-          radius: backTapRadius,
-          child: Image.asset(
-            backIconAsset,
-            semanticLabel: _tooltipBack,
-            width: iconSize,
-            height: iconSize,
-            fit: BoxFit.contain,
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: InkResponse(
+            onTap: () {
+              _logAnalytics(_analyticsBack);
+              onBack();
+            },
+            radius: backTapRadius,
+            child: Image.asset(
+              backIconAsset,
+              semanticLabel: _tooltipBack,
+              width: iconSize,
+              height: iconSize,
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ),
