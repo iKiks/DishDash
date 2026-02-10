@@ -117,13 +117,16 @@ class TrendingRecipesHeader extends StatelessWidget {
       message: tooltip,
       waitDuration: _tooltipWaitDuration,
       showDuration: _tooltipShowDuration,
-      child: RoundIconButton(
-        onTap: () {
-          _logAnalytics(analyticsAction);
-          onTap();
-        },
-        assetPath: assetPath,
-        semanticsLabel: semanticsLabel,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: RoundIconButton(
+          onTap: () {
+            _logAnalytics(analyticsAction);
+            onTap();
+          },
+          assetPath: assetPath,
+          semanticsLabel: semanticsLabel,
+        ),
       ),
     );
   }
