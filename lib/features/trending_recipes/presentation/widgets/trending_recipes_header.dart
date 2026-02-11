@@ -131,7 +131,7 @@ class TrendingRecipesHeader extends StatelessWidget {
       child: Semantics(
         button: true,
         label: semanticsLabel,
-        hint: 'Activate $semanticsLabel',
+        hint: _activateHint(semanticsLabel),
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: RoundIconButton(
