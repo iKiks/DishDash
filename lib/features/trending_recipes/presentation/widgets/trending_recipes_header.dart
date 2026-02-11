@@ -24,6 +24,8 @@ class TrendingRecipesHeader extends StatelessWidget {
   static const _fontSizeLandscape = 18.0;
   static const _fontSizePortrait = 20.0;
 
+  static String _activateHint(String label) => 'Activate $label';
+
   final String title;
   final VoidCallback onBack;
   final VoidCallback onNotificationTap;
